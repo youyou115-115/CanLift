@@ -64,7 +64,7 @@ const Game = {
 
         const now = performance.now();
 
-        this.deltaTime = (now - this.lastTime) / 10.666;
+        this.deltaTime = (now - this.lastTime) / 12.666;
 
          this.lastTime = now;
 
