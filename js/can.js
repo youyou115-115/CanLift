@@ -132,26 +132,7 @@ class Can {
         const distance = Math.abs(
             sweetYWorld - lineY
         );
-
-        //=========================
-        // 影
-        //=========================
-
-        ctx.beginPath();
-
-        ctx.ellipse(
-            this.x + this.width / 2,
-            420,
-            22,
-            6,
-            0,
-            0,
-            Math.PI * 2
-        );
-
-        ctx.fillStyle = "rgba(0,0,0,0.18)";
-        ctx.fill();
-
+        
         //=========================
         // 缶
         //=========================
