@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CanLift Ver0.4</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="game-container">
+
+    <header>
+        <h1>CanLift</h1>
+        <span id="version">Ver0.4</span>
+    </header>
+
+
+    <main>
+
+        <canvas id="gameCanvas" width="800" height="450"></canvas>
+
+
+        <section id="ui">
+
+            <div class="status">
+                <p>
+                    SCORE:
+                    <span id="score">0</span>
+                </p>
+
+                <p>
+                    HEIGHT:
+                    <span id="height">0</span>
+                </p>
+
+                <p>
+                    CAN:
+                    <span id="canCount">0</span>
+                </p>
+            </div>
+
+
+            <button id="startButton">
+                START
+            </button>
+
+        </section>
+
+    </main>
+
+
+</div>
+
+
+<script src="js/can.js"></script>
+<script src="js/foot.js"></script>
+<script src="js/effects.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/game.js"></script>
+<script src="js/main.js"></script>
+
+
+</body>
+
+</html>
