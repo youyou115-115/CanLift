@@ -64,12 +64,12 @@ const Game = {
 
         const now = performance.now();
 
-        this.deltaTime = (now - this.lastTime) / 16.666;
+        this.deltaTime = (now - this.lastTime) / 10.666;
 
          this.lastTime = now;
 
         // 極端な遅延対策
-         this.deltaTime = Math.min(this.deltaTime,1);
+         this.deltaTime = Math.min(this.deltaTime,2);
 
         if(!this.running) return;
 
