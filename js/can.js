@@ -16,11 +16,11 @@ class Can {
 
         // 速度
         this.vx = 0;
-        this.vy = 1.2;
+        this.vy = 10;
 
         // 重力
-        this.gravity = 0.06;
-        this.maxFallSpeed = 6;
+        this.gravity = 0.2;
+        this.maxFallSpeed = 100;
 
         // 回転
         this.rotation = 0;
@@ -40,50 +40,50 @@ class Can {
     // 更新
     //=========================
 
-    update() {
+update(dt) {
 
-        if (!this.active) return;
+    if (!this.active) return;
 
-        // 重力
-        this.vy += this.gravity;
+    // 重力
+    this.vy += this.gravity * dt;
 
-        if (this.vy > this.maxFallSpeed) {
+    if (this.vy > this.maxFallSpeed) {
 
-            this.vy = this.maxFallSpeed;
-
-        }
-
-        // 移動
-        this.x += this.vx;
-        this.y += this.vy;
-
-        // 回転
-        this.rotation += this.rotationSpeed;
-        this.rotationSpeed *= 0.995;
-
-        // 左右の壁
-        if (this.x < 0) {
-
-            this.x = 0;
-            this.vx *= -0.8;
-
-        }
-
-        if (this.x + this.width > 800) {
-
-            this.x = 800 - this.width;
-            this.vx *= -0.8;
-
-        }
-
-        // 画面外
-        if (this.y > 750) {
-
-            this.active = false;
-
-        }
+        this.vy = this.maxFallSpeed;
 
     }
+
+    // 移動
+    this.x += this.vx * dt;
+    this.y += this.vy * dt;
+
+    // 回転
+    this.rotation += this.rotationSpeed * dt;
+    this.rotationSpeed *= Math.pow(0.995, dt);
+
+    // 左右の壁
+    if (this.x < 0) {
+
+        this.x = 0;
+        this.vx *= -0.8;
+
+    }
+
+    if (this.x + this.width > 800) {
+
+        this.x = 800 - this.width;
+        this.vx *= -0.8;
+
+    }
+
+    // 地面
+    if (this.y > 750) {
+
+        this.active = false;
+
+    }
+
+}
         //=========================
     // リフティング
     //=========================
@@ -91,7 +91,7 @@ class Can {
     lift() {
 
         // 上方向へ跳ねる
-        this.vy = -7.8;
+        this.vy = -9.5;
 
         // 少し左右にブレる
         this.vx += (Math.random() - 0.5) * 1.6;
@@ -271,13 +271,15 @@ const CanManager = {
 
 
 
-    update() {
+update(dt){
 
-        if (!this.can) return;
+    if(this.can){
 
-        this.can.update();
+        this.can.update(dt);
 
-    },
+    }
+
+},
 
 
 

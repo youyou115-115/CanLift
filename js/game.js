@@ -16,6 +16,8 @@ const Game = {
     message: "",
     messageTimer: 0,
     messageScale: 1,
+    lastTime: 0,
+    deltaTime: 1,
 
 
 
@@ -48,6 +50,7 @@ const Game = {
         this.message = "";
         this.messageTimer = 0;
         this.messageScale = 1;
+        this.lastTime = performance.now();
 
         CanManager.create();
 
@@ -59,11 +62,20 @@ const Game = {
 
     update(){
 
+        const now = performance.now();
+
+        this.deltaTime = (now - this.lastTime) / 16.666;
+
+         this.lastTime = now;
+
+        // 極端な遅延対策
+         this.deltaTime = Math.min(this.deltaTime,1);
+
         if(!this.running) return;
 
         Timing.updateDifficulty(this.liftCount);
 
-        CanManager.update();
+        CanManager.update(this.deltaTime);
 
         if(typeof Effects !== "undefined"){
 
