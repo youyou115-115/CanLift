@@ -16,7 +16,7 @@ class Can {
 
         // 速度
         this.vx = 0;
-        this.vy = 10;
+        this.vy = 5;
 
         // 重力
         this.gravity = 0.2;
