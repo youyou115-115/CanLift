@@ -60,6 +60,10 @@ const Input = {
                 game.messageScale = 1.5;
                 game.messageTimer = 60;
 
+                if(typeof Sound !== "undefined"){
+                Sound.play("perfect");
+            }
+
                 if(typeof Effects !== "undefined"){
 
                     Effects.perfect(can.x, can.y);
@@ -81,6 +85,10 @@ const Input = {
                 game.messageScale = 1.2;
                 game.messageTimer = 45;
 
+                            if(typeof Sound !== "undefined"){
+                Sound.play("good");
+            }
+
                 if(typeof Effects !== "undefined"){
 
                     Effects.create(can.x, can.y);
@@ -96,6 +104,11 @@ const Input = {
                 game.message = "MISS";
                 game.messageScale = 1.0;
                 game.messageTimer = 30;
+
+                if(typeof Sound !== "undefined"){
+                Sound.play("miss");
+            }
+
 
                 break;
 

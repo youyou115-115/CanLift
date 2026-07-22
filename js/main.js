@@ -15,6 +15,7 @@ window.addEventListener("load", () => {
 
         startButton.addEventListener("click", () => {
 
+            Sound.init();
             Game.start();
 
         });

@@ -41,7 +41,7 @@ const Timing = {
     check(can){
 
         if(!can){
-
+              
             return{
 
                 result:"MISS",
