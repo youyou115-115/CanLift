@@ -84,6 +84,15 @@ canvas {
 
     border-radius:10px;
 
+    width: min(100vw, 800px);
+
+    height: auto;
+
+    display: block;
+
+    margin: 0 auto;
+
+    touch-action: manipulation;
 }
 
 
