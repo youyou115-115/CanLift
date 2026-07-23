@@ -138,6 +138,10 @@ if(
 
         this.message = "GAME OVER";
         this.messageScale = 1.3;
+         this.messageTimer = 999;
+
+        this.draw();
+
 
     }
 
