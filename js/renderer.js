@@ -33,29 +33,33 @@ const Renderer = {
 
         if(typeof UI !== "undefined"){
 
-    UI.draw(ctx);
+    UI.draw(ctx, game);
 
 }
 
-// HP表示
-ctx.font = "32px sans-serif";
-ctx.textAlign = "right";
+// HP TEST表示
 
 for(let i = 0; i < game.maxHp; i++){
 
     if(i < game.hp){
+
         ctx.fillStyle = "#ff4444";
+
     }else{
-        ctx.fillStyle = "#666666";
+
+        ctx.fillStyle = "#777777";
+
     }
 
-    ctx.fillText(
-        "❤",
-        780 - (game.maxHp - 1 - i) * 35,
-        40
+    ctx.fillRect(
+        680 + i * 30,
+        18,
+        22,
+        22
     );
 
 }
+
         // メッセージ
         if(game.message){
 

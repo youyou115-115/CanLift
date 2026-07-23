@@ -16,7 +16,7 @@ class Can {
 
         // 速度
         this.vx = 0;
-        this.vy = 5;
+        this.vy = 6;
 
         // 重力
         this.gravity = 0.2;
@@ -320,8 +320,8 @@ this.cans.push(can);
 
         // 初速
         can.vy =
-            -1 -
-            Math.random()*1;
+            2 -
+            Math.random()*3;
 
         // 重力
         can.gravity =
