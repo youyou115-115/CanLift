@@ -4,7 +4,10 @@
 
     PERFECT演出強化版
 */
-
+const IS_MOBILE =
+    /Android|iPhone|iPad|iPod/i.test(
+        navigator.userAgent
+    );
 
 const Effects = {
 
@@ -27,11 +30,14 @@ const Effects = {
 
 
 
-        for(
-            let i=0;
-            i<10;
-            i++
-        ){
+        const amount =
+    IS_MOBILE ? 5 : 10;
+
+for(
+    let i=0;
+    i<amount;
+    i++
+){
 
 
             this.particles.push({
@@ -82,35 +88,35 @@ const Effects = {
 
 
 
-        this.flashes.push({
+if(!IS_MOBILE){
 
+    this.flashes.push({
 
-            x:x+15,
+        x:x+15,
+        y:y+20,
 
-            y:y+20,
+        radius:10,
 
+        maxRadius:90,
 
-            radius:10,
+        alpha:1
 
+    });
 
-            maxRadius:90,
-
-
-            alpha:1
-
-
-
-        });
+}
 
 
 
 
 
-        for(
-            let i=0;
-            i<25;
-            i++
-        ){
+        const amount =
+    IS_MOBILE ? 10 : 25;
+
+for(
+    let i=0;
+    i<amount;
+    i++
+){
 
 
 
@@ -196,23 +202,20 @@ const Effects = {
 
 
 
+if(!IS_MOBILE){
 
-        this.flashes.forEach(
+    this.flashes.forEach(
 
-            f=>{
+        f=>{
 
+            f.radius += 5;
+            f.alpha -= 0.05;
 
-                f.radius += 5;
+        }
 
+    );
 
-                f.alpha -= 0.05;
-
-
-
-            }
-
-
-        );
+}
 
 
 
@@ -247,50 +250,34 @@ const Effects = {
 
         // 光
 
-        this.flashes.forEach(
+  if(!IS_MOBILE){
 
-            f=>{
+    this.flashes.forEach(
 
+        f=>{
 
-                ctx.beginPath();
+            ctx.beginPath();
 
+            ctx.arc(
+                f.x,
+                f.y,
+                f.radius,
+                0,
+                Math.PI*2
+            );
 
-                ctx.arc(
+            ctx.fillStyle =
+                "rgba(255,215,0,"+
+                f.alpha+
+                ")";
 
-                    f.x,
+            ctx.fill();
 
-                    f.y,
+        }
 
-                    f.radius,
+    );
 
-                    0,
-
-                    Math.PI*2
-
-                );
-
-
-
-                ctx.fillStyle =
-
-                    "rgba(255,215,0,"+
-
-                    f.alpha+
-
-                    ")";
-
-
-
-                ctx.fill();
-
-
-
-            }
-
-
-        );
-
-
+}
 
 
 
