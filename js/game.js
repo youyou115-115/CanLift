@@ -13,6 +13,11 @@ const Game = {
     score: 0,
     liftCount: 0,
 
+    hp: 3,
+    maxHp: 3,
+
+    lastAddedCount:0,
+
     message: "",
     messageTimer: 0,
     messageScale: 1,
@@ -47,6 +52,10 @@ const Game = {
         this.score = 0;
         this.liftCount = 0;
 
+        this.hp = this.maxHp;
+
+        this.lastAddedCount = 0;
+
         this.message = "";
         this.messageTimer = 0;
         this.messageScale = 1;
@@ -77,6 +86,15 @@ const Game = {
 
         CanManager.update(this.deltaTime);
 
+if(
+    this.liftCount >= this.lastAddedCount + 10
+){
+
+    CanManager.increaseTarget();
+
+    this.lastAddedCount = this.liftCount;
+
+}
         if(typeof Effects !== "undefined"){
 
             Effects.update();
@@ -90,15 +108,6 @@ const Game = {
         }else{
 
             this.message = "";
-
-        }
-
-        if(CanManager.can && !CanManager.can.active){
-
-            this.running = false;
-
-            this.message = "GAME OVER";
-            this.messageScale = 1.3;
 
         }
 
@@ -118,6 +127,21 @@ const Game = {
         Renderer.draw(this);
 
     },
+
+    damage(){
+
+    this.hp--;
+
+    if(this.hp <= 0){
+
+        this.running = false;
+
+        this.message = "GAME OVER";
+        this.messageScale = 1.3;
+
+    }
+
+},
 
 
 

@@ -106,18 +106,15 @@ update(dt) {
 
     }
 
-
-
     //=========================
-    // Sweet Spot
-    //=========================
+// Sweet Spot
+//=========================
 
-    getSweetSpotY() {
+getSweetSpotY() {
 
-        return this.y + this.sweetSpotOffset;
+    return this.y + this.sweetSpotOffset;
 
-    }
-
+}
 
 
     //=========================
@@ -185,10 +182,18 @@ update(dt) {
             this.sweetSpotOffset - this.height / 2;
 
         // 点のサイズ
-        let dotSize = 4;
+// 点のサイズ
+let dotSize = 4;
 
-        // 色
-        let color = "#33bbff";
+// 追加缶なら少し大きくする
+if(this.isExtra){
+
+    dotSize += 3;
+
+}
+
+// 色
+let color = "#33bbff";
 
         if (distance < 80) {
 
@@ -249,76 +254,225 @@ update(dt) {
     }
 
 }
+
+
 //=========================
-// CanManager
+// CanManager Ver0.7
 //=========================
 
 const CanManager = {
 
-    can: null,
+    // 現在存在する缶
+    cans: [],
+
+    // 目標本数
+    targetCount: 1,
+
+    // 最大缶数
+    maxCount: 5,
 
 
 
-    create() {
+    //=========================
+    // ゲーム開始
+    //=========================
 
-        // ゲーム開始時は少し上から落下
-        this.can = new Can(
-            383,
-            -120
-        );
+    create(){
 
-    },
+        const can = new Can(383, -120);
+can.isExtra = false;
 
+this.cans.push(can);
 
+        this.cans = [];
 
-update(dt){
+        this.targetCount = 1;
 
-    if(this.can){
-
-        this.can.update(dt);
-
-    }
-
-},
-
-
-
-    draw(ctx) {
-
-        if (!this.can) return;
-
-        this.can.draw(
-            ctx,
-            Timing.getLineY()
-        );
+        this.fill();
 
     },
 
 
 
-    getSweetSpotY() {
+    //=========================
+    // 缶を1本生成
+    //=========================
 
-        if (!this.can) return null;
+    spawnCan(){
 
-        return this.can.getSweetSpotY();
+        const x =
+            120 +
+            Math.random() * 560;
+
+        const y =
+            -100 -
+            Math.random() * 100;
+
+        const can =
+            new Can(x,y);
+
+        // 追加缶
+        can.isExtra = true;
+
+        // 横速度
+        can.vx =
+            (Math.random()-0.5) * 3;
+
+        // 初速
+        can.vy =
+            -1 -
+            Math.random()*1;
+
+        // 重力
+        can.gravity =
+            0.08 +
+            Math.random()*0.06;
+
+        this.cans.push(can);
 
     },
 
 
 
-    lift() {
+    //=========================
+    // 足りない缶を補充
+    //=========================
 
-        if (!this.can) return;
+    fill(){
 
-        this.can.lift();
+        while(
+
+            this.cans.length
+            <
+            this.targetCount
+
+        ){
+
+            this.spawnCan();
+
+        }
 
     },
 
 
 
-    reset() {
+    //=========================
+    // 缶を増やす
+    //=========================
 
-        this.can = null;
+    increaseTarget(){
+
+        if(
+
+            this.targetCount
+            <
+            this.maxCount
+
+        ){
+
+            this.targetCount++;
+
+        }
+
+        this.fill();
+
+    },
+    //=========================
+    // 更新
+    //=========================
+
+    update(dt){
+
+        for(let i = this.cans.length - 1; i >= 0; i--){
+
+            const can = this.cans[i];
+
+            can.update(dt);
+
+            // 落ちた
+            if(!can.active){
+
+                // 配列から削除
+                this.cans.splice(i,1);
+
+                // HP減少
+                Game.damage();
+
+                // GAME OVERなら補充しない
+                if(!Game.running){
+                    continue;
+                }
+
+                // 少し待って補充
+                setTimeout(()=>{
+
+                    if(!Game.running) return;
+
+                    this.fill();
+
+                },800);
+
+            }
+
+        }
+
+    },
+
+
+
+    //=========================
+    // 描画
+    //=========================
+
+    draw(ctx){
+
+        this.cans.forEach(can=>{
+
+            can.draw(
+                ctx,
+                Timing.getLineY()
+            );
+
+        });
+
+    },
+
+
+
+    //=========================
+    // 判定できる缶一覧
+    //=========================
+
+    getJudgeCans(){
+
+        return this.cans.filter(can=>{
+
+            if(!can.active)
+                return false;
+
+            const judge =
+                Timing.check(can);
+
+            return(
+                judge.result !==
+                "MISS"
+            );
+
+        });
+
+    },
+
+
+
+    //=========================
+    // リセット
+    //=========================
+
+    reset(){
+
+        this.cans = [];
+
+        this.targetCount = 1;
 
     }
 

@@ -60,33 +60,35 @@ const Timing = {
 
         );
 
+        const perfectRange =
+    can.isExtra
+        ? this.perfectRange + 5
+        : this.perfectRange;
 
-
-        if(distance <= this.perfectRange){
-
-            return{
-
-                result:"PERFECT",
-
-                distance
-
-            };
-
-        }
+const goodRange =
+    can.isExtra
+        ? this.goodRange + 15
+        : this.goodRange;
 
 
 
-        if(distance <= this.goodRange){
+       if(distance <= perfectRange){
 
-            return{
+    return {
+        result:"PERFECT",
+        distance
+    };
 
-                result:"GOOD",
+}
 
-                distance
+if(distance <= goodRange){
 
-            };
+    return {
+        result:"GOOD",
+        distance
+    };
 
-        }
+}
 
 
 

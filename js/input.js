@@ -35,21 +35,31 @@ const Input = {
 
 
 
-    tap(){
+tap(){
 
-        const game = this.game;
+    const game = this.game;
 
-        if(!game.running) return;
+    if(!game.running) return;
 
-        const can = CanManager.can;
+    let hit = false;
+    let comboCount = 0;
 
-        if(!can || !can.active) return;
+// 判定ラインにある缶だけ取得
+const judgeCans =
+    CanManager.getJudgeCans();
+
+judgeCans.forEach(can => {
+
 
         const judge = Timing.check(can);
 
         switch(judge.result){
 
             case "PERFECT":
+
+            comboCount++;
+      
+                hit = true;
 
                 can.lift();
 
@@ -61,20 +71,20 @@ const Input = {
                 game.messageTimer = 60;
 
                 if(typeof Sound !== "undefined"){
-                Sound.play("perfect");
-            }
+                    Sound.play("perfect");
+                }
 
                 if(typeof Effects !== "undefined"){
-
                     Effects.perfect(can.x, can.y);
-
                 }
 
                 break;
 
 
-
             case "GOOD":
+
+                hit = true;
+                comboCount++;
 
                 can.lift();
 
@@ -85,35 +95,65 @@ const Input = {
                 game.messageScale = 1.2;
                 game.messageTimer = 45;
 
-                            if(typeof Sound !== "undefined"){
-                Sound.play("good");
-            }
-
-                if(typeof Effects !== "undefined"){
-
-                    Effects.create(can.x, can.y);
-
+                if(typeof Sound !== "undefined"){
+                    Sound.play("good");
                 }
 
-                break;
-
-
-
-            default:
-
-                game.message = "MISS";
-                game.messageScale = 1.0;
-                game.messageTimer = 30;
-
-                if(typeof Sound !== "undefined"){
-                Sound.play("miss");
-            }
-
+                if(typeof Effects !== "undefined"){
+                    Effects.create(can.x, can.y);
+                }
 
                 break;
 
         }
 
+    });
+
+    if(comboCount >= 2){
+
+    switch(comboCount){
+
+        case 2:
+            game.score += 20;
+            game.message = "DOUBLE!!";
+            break;
+
+        case 3:
+            game.score += 50;
+            game.message = "TRIPLE!!";
+            break;
+
+        case 4:
+            game.score += 100;
+            game.message = "MEGA!!";
+            break;
+
+        default:
+            game.score += 200;
+            game.message = "LEGEND!!";
+            break;
     }
+
+    game.messageScale = 1.8;
+    game.messageTimer = 70;
+
+    if(typeof Sound !== "undefined"){
+        Sound.play("perfect");
+    }
+
+}
+    if(!hit){
+
+        game.message = "MISS";
+        game.messageScale = 1.0;
+        game.messageTimer = 30;
+
+        if(typeof Sound !== "undefined"){
+            Sound.play("miss");
+        }
+
+    }
+
+}
 
 };
