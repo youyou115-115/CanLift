@@ -59,7 +59,7 @@ update(dt) {
 
     // 回転
     this.rotation += this.rotationSpeed * dt;
-    this.rotationSpeed *= Math.pow(0.995, dt);
+    this.rotationSpeed *= 0.995;
 
     // 左右の壁
     if (this.x < 0) {
@@ -270,6 +270,7 @@ const CanManager = {
 
     // 最大缶数
     maxCount: 5,
+    respawnTimer: 0,
 
 
 
@@ -279,18 +280,17 @@ const CanManager = {
 
     create(){
 
-        const can = new Can(383, -120);
-can.isExtra = false;
+    this.cans = [];
 
-this.cans.push(can);
+    this.targetCount = 1;
+    this.respawnTimer = 0;
 
-        this.cans = [];
+    const can = new Can(383, -120);
+    can.isExtra = false;
 
-        this.targetCount = 1;
+    this.cans.push(can);
 
-        this.fill();
-
-    },
+},
 
 
 
@@ -381,42 +381,44 @@ this.cans.push(can);
     // 更新
     //=========================
 
-    update(dt){
+update(dt){
 
-        for(let i = this.cans.length - 1; i >= 0; i--){
+    for(let i = this.cans.length - 1; i >= 0; i--){
 
-            const can = this.cans[i];
+        const can = this.cans[i];
 
-            can.update(dt);
+        can.update(dt);
 
-            // 落ちた
-            if(!can.active){
+        if(!can.active){
 
-                // 配列から削除
-                this.cans.splice(i,1);
+            this.cans.splice(i,1);
 
-                // HP減少
-                Game.damage();
+            Game.damage();
 
-                // GAME OVERなら補充しない
-                if(!Game.running){
-                    continue;
-                }
-
-                // 少し待って補充
-                setTimeout(()=>{
-
-                    if(!Game.running) return;
-
-                    this.fill();
-
-                },800);
-
+            if(!Game.running){
+                continue;
             }
+
+            this.respawnTimer = 48;
 
         }
 
-    },
+    }
+
+    // ←ここが重要！ forの外
+    if(this.respawnTimer > 0){
+
+        this.respawnTimer--;
+
+        if(this.respawnTimer <= 0){
+
+            this.fill();
+
+        }
+
+    }
+
+},
 
 
 
