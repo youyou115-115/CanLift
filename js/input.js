@@ -71,11 +71,11 @@ judgeCans.forEach(can => {
                 game.messageTimer = 60;
 
                 if(typeof Sound !== "undefined"){
-                    Sound.play("perfect");
+                    //Sound.play("perfect");
                 }
 
                 if(typeof Effects !== "undefined"){
-                    //Effects.perfect(can.x, can.y);
+                    Effects.perfect(can.x, can.y);
                 }
 
                 break;
@@ -96,7 +96,7 @@ judgeCans.forEach(can => {
                 game.messageTimer = 45;
 
                 if(typeof Sound !== "undefined"){
-                    Sound.play("good");
+                    //Sound.play("good");
                 }
 
                 if(typeof Effects !== "undefined"){
