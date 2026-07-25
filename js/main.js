@@ -1,25 +1,13 @@
-/*
-    CanLift Ver0.5
-    main.js
-*/
+startButton.addEventListener("click", async () => {
 
-window.addEventListener("load", () => {
+    await Sound.init();
 
-    const canvas = document.getElementById("gameCanvas");
+    if(Sound.context.state === "suspended"){
 
-    Game.init(canvas);
-
-    const startButton = document.getElementById("startButton");
-
-    if(startButton){
-
-        startButton.addEventListener("click", () => {
-
-            Sound.init();
-            Game.start();
-
-        });
+        await Sound.context.resume();
 
     }
+
+    Game.start();
 
 });
