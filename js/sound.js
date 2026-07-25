@@ -24,16 +24,10 @@ const Sound = {
 
     },
 
-    play(name){
+play(name){
 
-        const sound = this.audio[name];
+    return;
 
-        if(!sound) return;
-
-        sound.currentTime = 0;
-
-        sound.play().catch(()=>{});
-
-    }
+}
 
 };
