@@ -1,12 +1,17 @@
-startButton.addEventListener("click", async () => {
+const canvas = document.getElementById("gameCanvas");
+
+Game.init(canvas);
+
+
+const startButton =
+document.getElementById("startButton");
+
+
+startButton.addEventListener("click", async()=>{
 
     await Sound.init();
 
-    if(Sound.context.state === "suspended"){
-
-        await Sound.context.resume();
-
-    }
+    Sound.play("start");
 
     Game.start();
 

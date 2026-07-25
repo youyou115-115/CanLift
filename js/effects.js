@@ -110,7 +110,7 @@ if(!IS_MOBILE){
 
 
         const amount =
-    IS_MOBILE ? 10 : 25;
+    IS_MOBILE ? 8 : 8;
 
 for(
     let i=0;

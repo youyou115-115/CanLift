@@ -9,98 +9,88 @@ const Renderer = {
 
         const ctx = game.ctx;
 
+        if(!ctx){
+            return;
+        }
+
         ctx.clearRect(0,0,800,700);
 
-        // 空
+        // 背景
         ctx.fillStyle="#87ceeb";
         ctx.fillRect(0,0,800,700);
 
+
         // 判定ライン
-        Timing.draw(ctx);
+        if(typeof Timing !== "undefined"){
+
+            Timing.draw(ctx);
+
+        }
+
 
         // 缶
-        CanManager.draw(
-            ctx,
-            Timing.getLineY()
-        );
+// 缶
+if(typeof CanManager !== "undefined"
+    && CanManager.cans){
+
+    CanManager.draw(
+        ctx,
+        Timing.getLineY()
+    );
+
+}
+
 
         // エフェクト
-        if(typeof Effects!=="undefined"){
+        if(typeof Effects !== "undefined"){
 
             Effects.draw(ctx);
 
         }
 
+
+        // UI
         if(typeof UI !== "undefined"){
 
-    UI.draw(ctx, game);
+            UI.draw(ctx,game);
 
-}
+        }
 
-// HP TEST表示
 
-for(let i = 0; i < game.maxHp; i++){
+        // HP
+        if(game.maxHp){
 
-    if(i < game.hp){
+            for(let i=0;i<game.maxHp;i++){
 
-        ctx.fillStyle = "#ff4444";
+                ctx.fillStyle =
+                    i < game.hp
+                    ? "#ff4444"
+                    : "#777777";
 
-    }else{
+                ctx.fillRect(
+                    680+i*30,
+                    18,
+                    22,
+                    22
+                );
 
-        ctx.fillStyle = "#777777";
+            }
 
-    }
+        }
 
-    ctx.fillRect(
-        680 + i * 30,
-        18,
-        22,
-        22
-    );
-
-}
 
         // メッセージ
         if(game.message){
 
-            ctx.save();
-
-            ctx.translate(400,200);
-
-            ctx.scale(
-                game.messageScale,
-                game.messageScale
-            );
-
-            ctx.textAlign="center";
+            ctx.fillStyle="#ffffff";
             ctx.font="bold 36px sans-serif";
-
-            switch(game.message){
-
-                case "PERFECT!":
-                    ctx.fillStyle="#ffe600";
-                    break;
-
-                case "GOOD!":
-                    ctx.fillStyle="#ffffff";
-                    break;
-
-                case "MISS":
-                    ctx.fillStyle="#ff6666";
-                    break;
-
-                default:
-                    ctx.fillStyle="#ffffff";
-
-            }
+            ctx.textAlign="center";
 
             ctx.fillText(
                 game.message,
-                0,
-                0
+                400,
+                200
             );
-
-            ctx.restore();
 
         }
 

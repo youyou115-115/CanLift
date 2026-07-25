@@ -38,14 +38,22 @@ const Game = {
         }
 
         Input.init(this);
-
         Renderer.draw(this);
+
+        
 
     },
 
 
 
     start(){
+
+    if(this.running){
+
+        return;
+
+    }
+        console.log("Game Start");
 
         this.running = true;
 
@@ -63,8 +71,11 @@ const Game = {
 
         CanManager.create();
 
-        this.loop();
+console.log("CAN COUNT:", CanManager.cans.length);
 
+this.loop();
+
+        
     },
 
 

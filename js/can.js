@@ -114,6 +114,10 @@ getSweetSpotY() {
 
     draw(ctx, lineY) {
 
+            console.log("DRAW CAN", this.x, this.y);
+
+    if (!this.active) return;
+
         if (!this.active) return;
 
         const sweetYWorld = this.getSweetSpotY();

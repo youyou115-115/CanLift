@@ -36,6 +36,7 @@ const Input = {
 
 
 tap(){
+    
 
     const game = this.game;
 
