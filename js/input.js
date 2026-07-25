@@ -138,7 +138,7 @@ judgeCans.forEach(can => {
     game.messageTimer = 70;
 
     if(typeof Sound !== "undefined"){
-        Sound.play("perfect");
+        //Sound.play("perfect");
     }
 
 }
