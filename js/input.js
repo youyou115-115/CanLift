@@ -75,7 +75,7 @@ judgeCans.forEach(can => {
                 }
 
                 if(typeof Effects !== "undefined"){
-                    Effects.perfect(can.x, can.y);
+                    //Effects.perfect(can.x, can.y);
                 }
 
                 break;
