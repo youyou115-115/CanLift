@@ -5,35 +5,26 @@
 
 class Can {
 
-    constructor(x, y) {
+    static image = null;
 
-        this.x = x;
-        this.y = y;
+constructor(x, y) {
 
-        // サイズ
-        this.width = 34;
-        this.height = 52;
+    // サイズ
+    this.width = 34;
+    this.height = 52;
 
-        // 速度
-        this.vx = 0;
-        this.vy = 6;
+    this.maxFallSpeed = 100;
+    this.sweetSpotOffset = this.height / 2;
 
-        // 重力
-        this.gravity = 0.2;
-        this.maxFallSpeed = 100;
+    if(!Can.image){
 
-        // 回転
-        this.rotation = 0;
-        this.rotationSpeed = 0;
+    Can.createImage();
 
-        // 状態
-        this.active = true;
+}
 
-        // Sweet Spot（缶の中心）
-        this.sweetSpotOffset = this.height / 2;
+    this.reset(x, y, false);
 
-    }
-
+}
 
 
     //=========================
@@ -144,35 +135,13 @@ getSweetSpotY() {
         ctx.rotate(this.rotation);
 
         // 本体
-        ctx.fillStyle = "#dddddd";
-
-        ctx.fillRect(
-            -this.width / 2,
-            -this.height / 2,
-            this.width,
-            this.height
-        );
-
-        ctx.strokeStyle = "#666";
-        ctx.lineWidth = 2;
-
-        ctx.strokeRect(
-            -this.width / 2,
-            -this.height / 2,
-            this.width,
-            this.height
-        );
-
-        // 上下ライン
-        ctx.beginPath();
-
-        ctx.moveTo(-15, -22);
-        ctx.lineTo(15, -22);
-
-        ctx.moveTo(-15, 22);
-        ctx.lineTo(15, 22);
-
-        ctx.stroke();
+ctx.drawImage(
+    Can.image,
+    -this.width/2,
+    -this.height/2,
+    this.width,
+    this.height
+);
 
             //=========================
         // Smart Dot
@@ -252,7 +221,83 @@ let color = "#33bbff";
         ctx.restore();
 
     }
+       //=========================
+    // リセット
+    //=========================
 
+ reset(x, y, isExtra){
+
+    this.x = x;
+    this.y = y;
+
+    this.active = true;
+
+    this.rotation = 0;
+    this.rotationSpeed = 0;
+
+    this.isExtra = isExtra;
+
+    if(isExtra){
+
+        this.vx = (Math.random()-0.5)*3;
+        this.vy = 2-Math.random()*3;
+        this.gravity = 0.08 + Math.random()*0.06;
+
+    }else{
+
+        this.vx = 0;
+        this.vy = 6;
+        this.gravity = 0.2;
+
+    }
+
+}
+static createImage(){
+
+    const canvas =
+        document.createElement("canvas");
+
+    canvas.width = 34;
+    canvas.height = 52;
+
+    const ctx =
+        canvas.getContext("2d");
+
+    // 本体
+    ctx.fillStyle = "#dddddd";
+
+    ctx.fillRect(
+        0,
+        0,
+        34,
+        52
+    );
+
+    // 枠
+    ctx.strokeStyle = "#666";
+    ctx.lineWidth = 2;
+
+    ctx.strokeRect(
+        0,
+        0,
+        34,
+        52
+    );
+
+    // 上下ライン
+    ctx.beginPath();
+
+    ctx.moveTo(2,5);
+    ctx.lineTo(32,5);
+
+    ctx.moveTo(2,47);
+    ctx.lineTo(32,47);
+
+    ctx.stroke();
+
+    Can.image = canvas;
+
+}
 }
 
 
@@ -264,6 +309,7 @@ const CanManager = {
 
     // 現在存在する缶
     cans: [],
+    pool: [],
 
     // 目標本数
     targetCount: 1,
@@ -278,15 +324,27 @@ const CanManager = {
     // ゲーム開始
     //=========================
 
-    create(){
+create(){
 
     this.cans = [];
+    this.pool = [];
 
     this.targetCount = 1;
     this.respawnTimer = 0;
 
-    const can = new Can(383, -120);
-    can.isExtra = false;
+        // プール作成
+    for(let i = 0; i < this.maxCount; i++){
+
+        this.pool.push(new Can(0, 0));
+
+    }
+
+    // 最初の缶
+    const can = this.pool.pop();
+
+if(!can) return;
+
+can.reset(383,-120,false);
 
     this.cans.push(can);
 
@@ -308,31 +366,15 @@ const CanManager = {
             -100 -
             Math.random() * 100;
 
-        const can =
-            new Can(x,y);
+        const can = this.pool.pop();
 
-        // 追加缶
-        can.isExtra = true;
+if(!can) return;
 
-        // 横速度
-        can.vx =
-            (Math.random()-0.5) * 3;
+can.reset(x, y, true);
 
-        // 初速
-        can.vy =
-            2 -
-            Math.random()*3;
+this.cans.push(can);
 
-        // 重力
-        can.gravity =
-            0.08 +
-            Math.random()*0.06;
-
-        this.cans.push(can);
-
-    },
-
-
+},
 
     //=========================
     // 足りない缶を補充
@@ -391,7 +433,10 @@ update(dt){
 
         if(!can.active){
 
-            this.cans.splice(i,1);
+            const removed =
+this.cans.splice(i,1)[0];
+
+this.pool.push(removed);
 
             Game.damage();
 
@@ -441,6 +486,9 @@ update(dt){
 
 
 
+
+
+
     //=========================
     // 判定できる缶一覧
     //=========================
@@ -466,16 +514,6 @@ update(dt){
 
 
 
-    //=========================
-    // リセット
-    //=========================
-
-    reset(){
-
-        this.cans = [];
-
-        this.targetCount = 1;
-
-    }
 
 };
+
