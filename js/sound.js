@@ -12,6 +12,7 @@ comboStep:0,
 
 async init(){
 
+
     if(this.initialized)return;
 
     this.context=new(
@@ -22,6 +23,8 @@ async init(){
     this.initialized=true;
 
     console.log("CanLift Sound Ready");
+    
+
 
 },
 
@@ -54,8 +57,10 @@ play(type){
             break;
 
     }
+    
 
 },
+
 
 
 
@@ -94,6 +99,21 @@ tone(freq,time,vol,type="triangle"){
 
 },
 
+note(freq,length,delay,vol=0.2,type="triangle"){
+
+    setTimeout(()=>{
+
+        this.tone(
+            freq,
+            length,
+            vol,
+            type
+        );
+
+    },delay);
+
+},
+
 
 
 //--------------------
@@ -102,15 +122,21 @@ tone(freq,time,vol,type="triangle"){
 
 good(){
 
-    const p=
-        260+
-        Math.random()*25;
+    const p=260+Math.random()*20;
 
     this.tone(
         p,
         0.045,
         0.16,
         "triangle"
+    );
+
+    this.note(
+        p*1.4,
+        0.025,
+        15,
+        0.08,
+        "sine"
     );
 
 },
@@ -171,6 +197,42 @@ perfect(){
 
     },24);
 
+    if(this.comboStep>=10){
+
+    this.note(
+        base*2.5,
+        0.03,
+        45,
+        0.05,
+        "sine"
+    );
+
+}
+
+if(this.comboStep>=20){
+
+    this.note(
+        base*3,
+        0.03,
+        70,
+        0.04,
+        "triangle"
+    );
+
+}
+
+if(this.comboStep>=50){
+
+    this.note(
+        base*4,
+        0.05,
+        90,
+        0.05,
+        "square"
+    );
+
+}
+
 },
 
 
@@ -184,10 +246,18 @@ miss(){
     this.comboStep=0;
 
     this.tone(
-        130,
-        0.11,
-        0.15,
+        150,
+        0.08,
+        0.12,
         "sawtooth"
+    );
+
+    this.note(
+        100,
+        0.10,
+        25,
+        0.08,
+        "triangle"
     );
 
 },
@@ -228,6 +298,63 @@ start(){
 
     },110);
 
-}
+},
+//--------------------
+// COMBO JINGLE
+//--------------------
+
+combo(level){
+
+    switch(level){
+
+        case 10:
+
+            this.note(523,0.07,0,0.18);
+            this.note(659,0.07,60,0.18);
+            this.note(784,0.12,120,0.22);
+
+            break;
+
+        case 20:
+
+            this.note(523,0.06,0,0.18);
+            this.note(659,0.06,50,0.18);
+            this.note(784,0.06,100,0.20);
+            this.note(1046,0.12,150,0.22);
+
+            break;
+
+        case 30:
+
+            this.note(392,0.07,0,0.20);
+            this.note(523,0.07,55,0.20);
+            this.note(659,0.07,110,0.20);
+            this.note(1046,0.15,170,0.24);
+
+            break;
+
+        case 50:
+
+            this.note(392,0.06,0,0.20);
+            this.note(523,0.06,45,0.20);
+            this.note(659,0.06,90,0.20);
+            this.note(784,0.06,135,0.22);
+            this.note(1046,0.18,180,0.28);
+
+            break;
+
+        case 100:
+
+            this.note(262,0.10,0,0.25,"sawtooth");
+            this.note(523,0.08,70,0.22);
+            this.note(784,0.08,130,0.22);
+            this.note(1046,0.08,190,0.24);
+            this.note(1568,0.25,250,0.30,"square");
+
+            break;
+
+    }
+
+},
 
 };

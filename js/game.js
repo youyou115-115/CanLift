@@ -12,6 +12,9 @@ const Game = {
 
     score: 0,
     liftCount: 0,
+    combo: 0,
+maxCombo: 0,
+lastComboVoice: 0,
 
     hp: 3,
     maxHp: 3,
@@ -23,6 +26,9 @@ const Game = {
     messageScale: 1,
     lastTime: 0,
     deltaTime: 1,
+    comboMessage: "",
+comboTimer: 0,
+comboScale: 1,
 
 
 
@@ -59,6 +65,9 @@ const Game = {
 
         this.score = 0;
         this.liftCount = 0;
+        this.combo = 0;
+this.maxCombo = 0;
+this.lastComboVoice = 0;
 
         this.hp = this.maxHp;
 
@@ -121,6 +130,15 @@ if(
             this.message = "";
 
         }
+        if(this.comboTimer > 0){
+
+    this.comboTimer--;
+
+}else{
+
+    this.comboMessage = "";
+
+}
 
         if(typeof UI !== "undefined"){
 
@@ -138,6 +156,23 @@ if(
         Renderer.draw(this);
 
     },
+   
+    addCombo(){
+
+    this.combo++;
+
+    if(this.combo > this.maxCombo){
+
+        this.maxCombo = this.combo;
+
+    }
+
+},
+resetCombo(){
+
+    this.combo = 0;
+
+},
 
     damage(){
 

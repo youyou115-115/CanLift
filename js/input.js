@@ -61,6 +61,41 @@ judgeCans.forEach(can => {
             comboCount++;
       
                 hit = true;
+                game.addCombo();
+                switch(game.combo){
+
+    case 10:
+        Sound.combo(10);
+        break;
+
+    case 20:
+        Sound.combo(20);
+        break;
+
+    case 30:
+        Sound.combo(30);
+        break;
+
+    case 50:
+        Sound.combo(50);
+        break;
+
+    case 100:
+        Sound.combo(100);
+        break;
+
+}
+
+                if(game.combo >= 2){
+
+    game.comboMessage =
+        game.combo + " COMBO!";
+
+    game.comboTimer = 40;
+
+    game.comboScale = 1.4;
+
+}
 
                 can.lift();
 
@@ -79,6 +114,20 @@ judgeCans.forEach(can => {
                     Effects.perfect(can.x, can.y);
                 }
 
+                if(
+
+    game.combo % 10 === 0
+
+    &&
+
+    game.combo != game.lastComboVoice
+
+){
+
+    game.lastComboVoice = game.combo;
+
+}
+
                 break;
 
 
@@ -86,6 +135,41 @@ judgeCans.forEach(can => {
 
                 hit = true;
                 comboCount++;
+                game.addCombo();
+                switch(game.combo){
+
+    case 10:
+        Sound.combo(10);
+        break;
+
+    case 20:
+        Sound.combo(20);
+        break;
+
+    case 30:
+        Sound.combo(30);
+        break;
+
+    case 50:
+        Sound.combo(50);
+        break;
+
+    case 100:
+        Sound.combo(100);
+        break;
+
+}
+
+                if(game.combo >= 2){
+
+    game.comboMessage =
+        game.combo + " COMBO!";
+
+    game.comboTimer = 40;
+
+    game.comboScale = 1.4;
+
+}
 
                 can.lift();
 
@@ -103,6 +187,20 @@ judgeCans.forEach(can => {
                 if(typeof Effects !== "undefined"){
                     Effects.create(can.x, can.y);
                 }
+
+                if(
+
+    game.combo % 10 === 0
+
+    &&
+
+    game.combo != game.lastComboVoice
+
+){
+
+    game.lastComboVoice = game.combo;
+
+}
 
                 break;
 
@@ -152,9 +250,17 @@ judgeCans.forEach(can => {
         if(typeof Sound !== "undefined"){
             Sound.play("miss");
         }
-
+        game.resetCombo();
     }
 
+    if(game.combo==10){
+
+    Sound.playVoice("excellent");
+
 }
+
+
+}
+
 
 };

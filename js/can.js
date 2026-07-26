@@ -443,6 +443,7 @@ this.cans.splice(i,1)[0];
 this.pool.push(removed);
 
             Game.damage();
+            Game.resetCombo();
 
             if(!Game.running){
                 continue;

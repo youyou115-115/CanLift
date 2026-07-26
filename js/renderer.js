@@ -94,6 +94,36 @@ if(typeof CanManager !== "undefined"
 
         }
 
+        if(game.comboMessage){
+
+    ctx.save();
+
+    ctx.translate(400,260);
+
+    ctx.scale(
+        game.comboScale,
+        game.comboScale
+    );
+
+    ctx.textAlign="center";
+    ctx.font="bold 28px sans-serif";
+
+    ctx.fillStyle="#ffff55";
+
+    ctx.fillText(
+
+        game.comboMessage,
+
+        0,
+
+        0
+
+    );
+
+    ctx.restore();
+
+}
+
     }
 
 };
