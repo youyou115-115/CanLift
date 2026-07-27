@@ -405,7 +405,7 @@ updateFever(){
 
         this.feverReward = this.diceValue;
 
-        this.feverTimer = 60*12;
+        this.feverTimer = 60*8;
 
         this.feverState = "fever";
 
