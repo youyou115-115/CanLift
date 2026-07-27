@@ -101,6 +101,11 @@ diceTimer:0,
         this.combo = 0;
 this.maxCombo = 0;
 this.lastComboVoice = 0;
+this.comboMessage = "";
+this.comboTimer = 0;
+this.rewardColor = "#ffffff";
+this.feverFailed = false;
+this.diceResultTimer = 0;
 
         this.hp = this.maxHp;
 
@@ -250,6 +255,11 @@ resetCombo(){
 
         this.running = false;
 
+        // 演出をリセット
+    this.comboMessage = "";
+    this.comboTimer = 0;
+
+
         this.message = "GAME OVER";
         this.maxHp = 3;
         this.messageScale = 1.3;
@@ -395,7 +405,7 @@ updateFever(){
 
         this.feverReward = this.diceValue;
 
-        this.feverTimer = 60*5;
+        this.feverTimer = 60*12;
 
         this.feverState = "fever";
 
@@ -515,6 +525,18 @@ break;
 
 },
 endFever(){
+
+    // FEVER缶を全て回収
+CanManager.cans.forEach(can => {
+
+    can.active = false;
+    CanManager.pool.push(can);
+
+});
+
+CanManager.cans = [];
+
+CanManager.fill();
 
     this.feverWatchDog = 0;
 

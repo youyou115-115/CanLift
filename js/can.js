@@ -457,7 +457,11 @@ this.pool.push(removed);
                 continue;
             }
 
-            this.respawnTimer = 48;
+            if(!Game.feverMode){
+
+    this.respawnTimer = 48;
+
+};
 
         }
 
