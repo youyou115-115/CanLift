@@ -529,6 +529,8 @@ endFever(){
 
     this.diceValue = 0;
 
+    this.feverFailed = false;
+
     this.diceTimer = 0;
     this.cutinTimer = 0;
     this.feverTimer = 0;
