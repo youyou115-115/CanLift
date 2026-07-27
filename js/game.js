@@ -536,6 +536,7 @@ CanManager.cans.forEach(can => {
 
 CanManager.cans = [];
 
+CanManager.targetCount = 2;
 CanManager.fill();
 
     this.feverWatchDog = 0;
