@@ -7,6 +7,8 @@ const Sound={
 
 context:null,
 initialized:false,
+feverOsc:[],
+feverPlaying:false,
 
 comboStep:0,
 
@@ -354,6 +356,63 @@ combo(level){
             break;
 
     }
+
+},
+startFever(){
+
+    if(this.feverPlaying) return;
+
+    this.feverPlaying = true;
+
+    const notes=[
+        523,
+        659,
+        784,
+        1046
+    ];
+
+    let beat=0;
+
+    this.feverLoop=setInterval(()=>{
+
+        if(!this.feverPlaying){
+
+            clearInterval(this.feverLoop);
+            return;
+
+        }
+
+        const note=
+            notes[
+                beat%notes.length
+            ];
+
+        this.tone(
+            note,
+            0.09,
+            0.10,
+            "square"
+        );
+
+        setTimeout(()=>{
+
+            this.tone(
+                note*2,
+                0.04,
+                0.05,
+                "triangle"
+            );
+
+        },60);
+
+        beat++;
+
+    },220);
+
+},
+stopFever(){
+
+    this.feverPlaying=false;
 
 },
 

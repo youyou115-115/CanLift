@@ -321,7 +321,32 @@ if(!IS_MOBILE){
 
 
 
+    },
+    bigFever(){
+
+    for(let i=0;i<50;i++){
+
+        this.particles.push({
+
+            x:400,
+            y:300,
+
+            size:
+                Math.random()*10+5,
+
+            speedX:
+                (Math.random()-0.5)*12,
+
+            speedY:
+                (Math.random()-0.5)*12,
+
+            life:80
+
+        });
+
     }
+
+},
 
 
 

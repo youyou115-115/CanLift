@@ -442,7 +442,15 @@ this.cans.splice(i,1)[0];
 
 this.pool.push(removed);
 
-            Game.damage();
+            if(Game.feverMode){
+
+    Game.feverFailed = true;
+
+}else{
+
+    Game.damage();
+
+}
             Game.resetCombo();
 
             if(!Game.running){
@@ -516,6 +524,56 @@ this.pool.push(removed);
         });
 
     },
+    spawnFever(count){
+
+    for(let i=0;i<count;i++){
+
+        let can=this.pool.pop();
+
+if(!can){
+
+    can = new Can(0,0);
+
+}
+        let x;
+let y;
+
+
+if(count >= 5){
+
+    // 5・6は優遇
+    x = 220 + Math.random()*360;
+    y = -100 - i*100;
+
+}else{
+
+    x = 120 + Math.random()*560;
+    y = -80 - i*70;
+
+}
+
+
+can.reset(
+    x,
+    y,
+    true
+);
+
+
+// 5・6はゆっくり
+if(count >= 5){
+
+    can.vx *= 0.5;
+    can.vy *= 0.7;
+    can.gravity *= 0.7;
+
+}
+
+        this.cans.push(can);
+
+    }
+
+},
 
 
 
