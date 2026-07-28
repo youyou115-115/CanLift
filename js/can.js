@@ -114,7 +114,6 @@ getSweetSpotY() {
 
     draw(ctx, lineY) {
 
-            console.log("DRAW CAN", this.x, this.y);
 
     if (!this.active) return;
 
@@ -269,6 +268,7 @@ let color = "#33bbff";
 
     this.type=type;
 
+     this.rotation = 0;
 
     if(isExtra){
 
@@ -276,11 +276,17 @@ let color = "#33bbff";
         this.vy = 2-Math.random()*3;
         this.gravity = 0.08 + Math.random()*0.06;
 
+        this.rotationSpeed =
+            (Math.random()-0.5)*0.08;
+
     }else{
 
         this.vx = 0;
         this.vy = 6;
         this.gravity = 0.2;
+
+        this.rotationSpeed =
+            (Math.random()-0.5)*0.03;
 
     }
 
