@@ -639,15 +639,11 @@ can.reset(
     true
 );
 
+// FEVER缶は全体的にゆっくり
+can.vx *= 0.4;
+can.vy *= 0.45;
+can.gravity *= 0.45;
 
-// 5・6はゆっくり
-if(count >= 5){
-
-    can.vx *= 0.5;
-    can.vy *= 0.7;
-    can.gravity *= 0.7;
-
-}
 
         this.cans.push(can);
 
