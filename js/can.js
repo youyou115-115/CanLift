@@ -539,22 +539,28 @@ if(!can){
     can = new Can(0,0);
 
 }
-        let x;
-let y;
+      let x;
+      let y;
 
+    if(count >= 5){
 
-if(count >= 5){
+        const spacing = 100;
+        const startX =
+            400 - ((count - 1) * spacing) / 2;
 
-    // 5・6は優遇
-    x = 220 + Math.random()*360;
-    y = -100 - i*100;
+        x =
+            startX +
+            i * spacing +
+            (Math.random() - 0.5) * 20;
 
-}else{
+        y = -100 - i * 80;
 
-    x = 120 + Math.random()*560;
-    y = -80 - i*70;
+    }else{
 
-}
+        x = 120 + Math.random() * 560;
+        y = -80 - i * 70;
+
+    }
 
 
 can.reset(

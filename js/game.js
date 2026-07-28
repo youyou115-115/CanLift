@@ -537,12 +537,8 @@ CanManager.cans.forEach(can => {
 CanManager.cans = [];
 
 CanManager.targetCount = 2;
-CanManager.fill();
 
     this.feverWatchDog = 0;
-
-      this.comboMessage = "";
-    this.comboTimer = 0;
 
     this.feverMode = false;
 
@@ -560,21 +556,16 @@ CanManager.fill();
 
 
     // 缶がない場合は復帰
-    if(CanManager.cans.length === 0){
+    CanManager.cans = [];
 
-        CanManager.targetCount = 1;
-
-        CanManager.fill();
-
-    }
+CanManager.targetCount = 2;
+CanManager.fill();
 
 
     Sound.stopFever();
 
 },
 failFever(){
-
-    this.hp--;
 
     this.comboMessage = "FEVER FAILED";
     this.comboTimer = 90;
