@@ -379,6 +379,9 @@ if(!can) return;
 
 can.reset(383,-120,false);
 
+can.vy = 3;
+can.gravity = 0.12;
+
     this.cans.push(can);
 
 },
