@@ -2,41 +2,42 @@
 <html lang="ja">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CanLift</title>
 
-    <title>CanLift</title>
-
-    <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div id="game-container">
+<div id="titleScreen">
 
-    <header>
-        <h1>CanLift</h1>
-    </header>
+    <h1>CanLift</h1>
 
+    <button id="normalButton">
+        NORMAL MODE
+    </button>
 
-    <main>
+    <button id="feverButton">
+        FEVER MODE
+    </button>
 
-        <canvas id="gameCanvas" width="800" height="700"></canvas>
-
-
-
-
-            <button id="startButton">
-                START
-            </button>
-
-        </section>
-
-    </main>
-
+    <button id="startButton">
+        START
+    </button>
 
 </div>
 
+<div id="gameScreen" style="display:none;">
+
+    <canvas
+        id="gameCanvas"
+        width="800"
+        height="700">
+    </canvas>
+
+</div>
 
 <script src="js/timing.js"></script>
 <script src="js/can.js"></script>
@@ -48,7 +49,6 @@
 <script src="js/game.js"></script>
 <script src="js/main.js"></script>
 
-
 </body>
-
 </html>
+

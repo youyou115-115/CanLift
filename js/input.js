@@ -5,38 +5,93 @@
 
 const Input = {
 
+    
+
     game: null,
 
     init(game){
+
+       // if(!Game.running && Game.message==="GAME OVER"){
+
+    //Game.returnTitle();
+
+  //  return;
+
+//}
 
         this.game = game;
 
         const canvas = game.canvas;
 
         // マウス
-        canvas.addEventListener("click", () => {
+        canvas.addEventListener("click",(e)=>{
 
-            this.tap();
+    this.tap(e);
 
-        });
+});
 
         // タッチ
-        canvas.addEventListener("touchstart", (e) => {
+        canvas.addEventListener("touchstart",(e)=>{
 
-            e.preventDefault();
+    e.preventDefault();
 
-            this.tap();
+    this.tap(e);
 
-        }, {
-            passive: false
-        });
-
+},{
+    passive:false
+});
     },
 
 
 
-tap(){
-    
+tap(e){
+      //=========================
+    // タイトル画面
+    //=========================
+
+    if(Game.screen==="title"){
+
+        const rect =
+    this.game.canvas.getBoundingClientRect();
+
+const point =
+    e.touches ? e.touches[0] : e;
+
+const x =
+    point.clientX - rect.left;
+
+const y =
+    point.clientY - rect.top;
+
+
+        // NORMAL
+        if(
+            x>=250 && x<=550 &&
+            y>=300 && y<=370
+        ){
+
+            Game.gameMode="normal";
+            Game.screen="game";
+            Game.start();
+            return;
+
+        }
+
+        // FEVER
+        if(
+            x>=250 && x<=550 &&
+            y>=410 && y<=480
+        ){
+
+            Game.gameMode="fever";
+            Game.screen="game";
+            Game.start();
+            return;
+
+        }
+
+    }
+
 
     const game = this.game;
 

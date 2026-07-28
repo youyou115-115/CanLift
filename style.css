@@ -1,151 +1,58 @@
-* {
-    box-sizing: border-box;
-}
-
-
-body {
-
+body{
     margin:0;
-
-    background:#111;
-
-    color:white;
-
-    font-family:
-        "Segoe UI",
-        sans-serif;
-
+    background:#222;
+    font-family:sans-serif;
     display:flex;
-
     justify-content:center;
-
     align-items:center;
-
-    min-height:100vh;
-
+    height:100vh;
 }
 
-
-
-#game-container {
-
-    width:850px;
-
-    text-align:center;
-
-}
-
-
-
-header {
-
+#titleScreen{
     display:flex;
-
-    justify-content:center;
-
+    flex-direction:column;
     align-items:center;
-
     gap:20px;
-
 }
 
-
-
-h1 {
-
-    margin:10px 0;
-
-    font-size:36px;
-
+#titleScreen h1{
+    font-size:72px;
+    color:#fff;
+    margin-bottom:30px;
+    text-shadow:0 0 15px #00bfff;
 }
 
-
-
-#version {
-
-    color:#aaa;
-
-}
-
-
-
-canvas {
-
-    background:
-
-    linear-gradient(
-        #87ceeb,
-        #ffffff
-    );
-
-    border:
-
-    3px solid #333;
-
-    border-radius:10px;
-
-    width: min(100vw, 800px);
-
-    height: auto;
-
-    display: block;
-
-    margin: 0 auto;
-
-    touch-action: manipulation;
-}
-
-
-
-#ui {
-
-    margin-top:15px;
-
-}
-
-
-
-.status {
-
-    display:flex;
-
-    justify-content:center;
-
-    gap:30px;
-
-    font-size:18px;
-
-}
-
-
-
-button {
-
-    margin-top:15px;
-
-    padding:
-
-    12px 40px;
-
-
-    font-size:20px;
-
-    cursor:pointer;
-
-    border-radius:10px;
-
+#titleScreen button{
+    width:260px;
+    height:70px;
+    font-size:28px;
+    font-weight:bold;
     border:none;
-
-    background:#00aa55;
-
-    color:white;
-
+    border-radius:12px;
+    cursor:pointer;
 }
 
+#normalButton{
+    background:#4CAF50;
+    color:white;
+}
 
+#feverButton{
+    background:#ff9800;
+    color:white;
+}
 
-button:hover {
+#startButton{
+    margin-top:20px;
+    background:#2196F3;
+    color:white;
+}
 
-    background:#00cc66;
+#gameScreen{
+    display:none;
+}
 
+.selected{
+    outline:5px solid yellow;
+    transform:scale(1.05);
 }

@@ -8,6 +8,8 @@ const Game = {
     canvas: null,
     ctx: null,
 
+    screen: "title",
+
     running: false,
 
     score: 0,
@@ -32,6 +34,7 @@ comboScale: 1,
 rewardColor:"#ffffff",
 feverWatchDog:0,
 diceResultTimer:0,
+gameMode: "normal",
 //=========================
 // FEVER
 //=========================
@@ -81,6 +84,8 @@ diceTimer:0,
 
 
     start(){
+
+        this.screen = "game";
 
     if(this.running){
 
@@ -228,17 +233,20 @@ if(
 
     }
 
-    if(!this.feverMode){
+    if(
+    this.gameMode==="fever" &&
+    !this.feverMode
+){
 
-        this.feverGauge++;
+    this.feverGauge++;
 
-        if(this.feverGauge>=this.feverMax){
+    if(this.feverGauge>=this.feverMax){
 
-            this.startFever();
-
-        }
+        this.startFever();
 
     }
+
+}
 
 },
 resetCombo(){
@@ -266,6 +274,19 @@ resetCombo(){
          this.messageTimer = 999;
 
         this.draw();
+
+         // 2秒後にタイトルへ戻る
+    setTimeout(()=>{
+
+        Game.screen = "title";
+        Game.running = false;
+
+        document.getElementById("gameScreen").style.display = "none";
+        document.getElementById("titleScreen").style.display = "block";
+
+    },2000);
+
+    
 
 
     }
@@ -583,7 +604,21 @@ failFever(){
 
         this.draw();
 
+       
+
     }
+
+},
+returnTitle(){
+
+    this.screen = "title";
+
+    this.running = false;
+
+    this.message = "";
+    this.comboMessage = "";
+
+    Renderer.draw(this);
 
 },
 

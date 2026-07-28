@@ -3,6 +3,8 @@
     renderer.js
 */
 
+
+
 const Renderer = {
 
     draw(game){
@@ -12,6 +14,7 @@ const Renderer = {
         if(!ctx){
             return;
         }
+
 
         ctx.clearRect(0,0,800,700);
 
@@ -61,6 +64,7 @@ if(typeof CanManager !== "undefined"
 //=========================
 
 // 枠
+if(game.gameMode==="fever"){
 ctx.fillStyle="#333";
 
 ctx.fillRect(
@@ -104,6 +108,7 @@ ctx.fillText(
     20,
     102
 );
+
 if(game.feverGauge>=game.feverMax){
 
     ctx.fillStyle="#ffff55";
@@ -117,7 +122,7 @@ if(game.feverGauge>=game.feverMax){
     );
 
 }
-
+}
 
         // HP
         if(game.maxHp){
@@ -139,6 +144,7 @@ if(game.feverGauge>=game.feverMax){
             }
 
         }
+        
         //=========================
 // FEVER CUTIN
 //=========================
@@ -409,6 +415,9 @@ ctx.fillText(
 
 }
 
-    }
+
+
+    },
+     
 
 };
