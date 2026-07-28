@@ -19,7 +19,10 @@ body{
         #fff3b0 100%
     );
 
+    touch-action:none;
+
 }
+
 
 /*==================
 TITLE
@@ -38,9 +41,10 @@ TITLE
 
 }
 
+
 #titleScreen h1{
 
-    font-size:96px;
+    font-size:clamp(48px,12vw,96px);
 
     color:white;
 
@@ -56,11 +60,14 @@ TITLE
 
 }
 
+
 #titleScreen p{
 
-    margin:15px 0 50px;
+    margin:
+    10px 0
+    clamp(20px,5vh,50px);
 
-    font-size:28px;
+    font-size:clamp(16px,4vw,28px);
 
     color:white;
 
@@ -68,14 +75,16 @@ TITLE
 
 }
 
+
 /*==================
 BUTTON
 ==================*/
 
 #titleScreen button{
 
-    width:300px;
-    height:72px;
+    width:min(300px,75vw);
+
+    height:clamp(55px,10vw,72px);
 
     margin:12px;
 
@@ -83,7 +92,8 @@ BUTTON
 
     border-radius:40px;
 
-    font-size:28px;
+    font-size:clamp(20px,5vw,28px);
+
     font-weight:bold;
 
     cursor:pointer;
@@ -92,25 +102,31 @@ BUTTON
 
 }
 
+
 #titleScreen button:hover{
 
     transform:scale(1.06);
 
 }
 
+
 #normalButton{
 
     background:#45d36d;
+
     color:white;
 
 }
+
 
 #feverButton{
 
     background:#ff9800;
+
     color:white;
 
 }
+
 
 #startButton{
 
@@ -120,12 +136,13 @@ BUTTON
 
     color:#333;
 
-    font-size:34px;
+    font-size:clamp(24px,6vw,34px);
 
     box-shadow:
         0 0 20px gold;
 
 }
+
 
 .selected{
 
@@ -134,6 +151,7 @@ BUTTON
     transform:scale(1.05);
 
 }
+
 
 /*==================
 GAME
