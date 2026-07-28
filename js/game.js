@@ -35,6 +35,14 @@ rewardColor:"#ffffff",
 feverWatchDog:0,
 diceResultTimer:0,
 gameMode: "normal",
+healCount:0,
+healMax:3,
+healUnlocked:false,
+
+
+
+// 回復缶
+healTimer:900,
 //=========================
 // FEVER
 //=========================
@@ -84,6 +92,14 @@ diceTimer:0,
 
 
     start(){
+
+        this.meteorMode=false;
+
+this.meteorHP=100;
+
+this.meteorCount=0;
+
+this.meteorReward=false;
 
         this.screen = "game";
 
@@ -136,6 +152,10 @@ this.cutinTimer = 0;
 
 this.diceTimer = 0;
 
+this.healCount = 0;
+this.healUnlocked = false;
+this.healTimer = 900;
+
         CanManager.create();
 
 console.log("CAN COUNT:", CanManager.cans.length);
@@ -148,6 +168,7 @@ this.loop();
 
 
     update(){
+        
 
         if(this.feverMode){
 
@@ -171,6 +192,61 @@ this.loop();
         Timing.updateDifficulty(this.liftCount);
 
         CanManager.update(this.deltaTime);
+
+        // 回復缶出現タイマー
+
+// 金色回復缶（NORMALのみ）
+
+// 金色回復缶
+// 20 LIFT後から開始
+
+if(!this.feverMode){
+
+    if(
+        this.liftCount >= 20
+    ){
+
+        this.healUnlocked = true;
+
+    }
+
+
+    if(this.healUnlocked){
+
+        this.healTimer--;
+
+
+        if(
+            this.healTimer <= 0 &&
+            this.healCount < this.healMax
+        ){
+
+            CanManager.spawnHealCan();
+
+            this.healCount++;
+
+
+            // 10〜20秒
+            this.healTimer =
+            600 + Math.random()*600;
+
+        }
+
+    }
+
+}
+
+
+// 隕石イベント判定
+
+if(
+this.liftCount>=50 &&
+!this.meteorMode
+){
+
+    this.startMeteor();
+
+}
 
 if(
     this.liftCount >= this.lastAddedCount + 10
@@ -329,6 +405,8 @@ this.diceResultTimer=0;
 CanManager.cans.forEach(can=>{
 
     can.active=false;
+
+    can.type="normal";
 
     CanManager.pool.push(can);
 
@@ -617,6 +695,53 @@ returnTitle(){
 
     this.message = "";
     this.comboMessage = "";
+
+},
+
+startMeteor(){
+
+    this.meteorMode=true;
+
+    this.meteorHP=100;
+
+
+    // 缶を全部消す
+
+    CanManager.cans.forEach(can=>{
+
+        can.active=false;
+        CanManager.pool.push(can);
+
+    });
+
+
+    CanManager.cans=[];
+
+
+    this.message="METEOR!!";
+
+    this.messageTimer=120;
+
+
+    CanManager.spawnMeteor();
+
+
+},
+finishMeteor(){
+
+    this.meteorMode=false;
+
+
+    this.message="METEOR BREAK!!";
+
+    this.messageTimer=120;
+
+
+    this.score+=500;
+
+
+    CanManager.spawnCan();
+
 
 }
 

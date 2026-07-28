@@ -42,28 +42,29 @@ play(type){
 
     switch(type){
 
-        case"good":
-            this.good();
-            break;
+    case"good":
+        this.good();
+        break;
 
-        case"perfect":
-            this.perfect();
-            break;
+    case"perfect":
+        this.perfect();
+        break;
 
-        case"miss":
-            this.miss();
-            break;
+    case"miss":
+        this.miss();
+        break;
 
-        case"start":
-            this.start();
-            break;
+    case"start":
+        this.start();
+        break;
 
-    }
-    
+    case"heal":
+        this.heal();
+        break;
+
+}
 
 },
-
-
 
 
 tone(freq,time,vol,type="triangle"){
@@ -261,6 +262,47 @@ miss(){
         0.08,
         "triangle"
     );
+
+},
+
+//--------------------
+// HEAL
+//--------------------
+
+heal(){
+
+    // 回復チャージ音
+    this.tone(
+        523,
+        0.08,
+        0.18,
+        "sine"
+    );
+
+
+    setTimeout(()=>{
+
+        this.tone(
+            659,
+            0.08,
+            0.18,
+            "sine"
+        );
+
+    },60);
+
+
+    setTimeout(()=>{
+
+        this.tone(
+            1046,
+            0.15,
+            0.22,
+            "triangle"
+        );
+
+    },120);
+
 
 },
 

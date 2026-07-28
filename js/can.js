@@ -139,13 +139,42 @@ getSweetSpotY() {
         ctx.rotate(this.rotation);
 
         // 本体
-ctx.drawImage(
-    Can.image,
-    -this.width/2,
-    -this.height/2,
-    this.width,
-    this.height
-);
+if(this.type==="heal"){
+
+    ctx.fillStyle="gold";
+
+    ctx.fillRect(
+        -this.width/2,
+        -this.height/2,
+        this.width,
+        this.height
+    );
+
+
+    // 光の枠
+    ctx.strokeStyle="#fff5aa";
+    ctx.lineWidth=3;
+
+    ctx.strokeRect(
+        -this.width/2,
+        -this.height/2,
+        this.width,
+        this.height
+    );
+
+
+}else{
+
+    ctx.drawImage(
+        Can.image,
+        -this.width/2,
+        -this.height/2,
+        this.width,
+        this.height
+    );
+
+}
+
 
             //=========================
         // Smart Dot
@@ -229,17 +258,17 @@ let color = "#33bbff";
     // リセット
     //=========================
 
- reset(x, y, isExtra){
+ reset(x,y,isExtra,type="normal"){
 
-    this.x = x;
-    this.y = y;
+    this.x=x;
+    this.y=y;
 
-    this.active = true;
+    this.active=true;
 
-    this.rotation = 0;
-    this.rotationSpeed = 0;
+    this.isExtra=isExtra;
 
-    this.isExtra = isExtra;
+    this.type=type;
+
 
     if(isExtra){
 
@@ -442,9 +471,13 @@ this.cans.splice(i,1)[0];
 
 this.pool.push(removed);
 
-            if(Game.feverMode){
+            if(removed.type==="heal"){
 
-    Game.feverFailed = true;
+    // 金缶は落としてもペナルティなし
+
+}else if(Game.feverMode){
+
+    Game.feverFailed=true;
 
 }else{
 
@@ -584,6 +617,34 @@ if(count >= 5){
     }
 
 },
+spawnHealCan(){
+
+    let can=this.pool.pop();
+
+
+    if(!can){
+
+        can=new Can(0,0);
+
+    }
+
+
+    const x =
+    120 + Math.random()*560;
+
+
+    can.reset(
+        x,
+        -100,
+        true,
+        "heal"
+    );
+
+
+    this.cans.push(can);
+
+},
+
 
 
 

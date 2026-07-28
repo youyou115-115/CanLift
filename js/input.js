@@ -5,7 +5,33 @@
 
 const Input = {
 
-    
+   healCan(){
+
+    if(Game.hp < Game.maxHp){
+
+        Game.hp++;
+
+        Game.comboMessage = "RECOVER!!";
+
+    }else{
+
+        Game.comboMessage = "FULL HP!";
+
+    }
+
+
+    Game.comboTimer = 90;
+
+    Game.rewardColor = "#ffd700";
+
+
+    if(typeof Sound !== "undefined"){
+
+        Sound.play("heal");
+
+    }
+
+},
 
     game: null,
 
@@ -152,10 +178,22 @@ judgeCans.forEach(can => {
 
 }
 
-                can.lift();
+if(can.type==="heal"){
 
-                game.score += 30;
-                game.liftCount++;
+    this.healCan();
+
+    // 回復缶は消滅
+    can.active = false;
+
+}else{
+
+    can.lift();
+
+}
+
+
+game.score += 30;
+game.liftCount++;
 
                 game.message = "PERFECT!";
                 game.messageScale = 1.5;
@@ -226,11 +264,22 @@ judgeCans.forEach(can => {
 
 }
 
-                can.lift();
+  if(can.type==="heal"){
 
-                game.score += 10;
-                game.liftCount++;
+    this.healCan();
 
+    // 回復缶は消滅
+    can.active = false;
+
+}else{
+
+    can.lift();
+
+}
+
+
+game.score += 10;
+game.liftCount++;
                 game.message = "GOOD!";
                 game.messageScale = 1.2;
                 game.messageTimer = 45;
