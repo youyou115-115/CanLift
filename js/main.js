@@ -1,6 +1,31 @@
 const canvas =
 document.getElementById("gameCanvas");
 
+function resizeCanvas(){
+
+    const baseWidth = 800;
+    const baseHeight = 700;
+
+    const scale = Math.min(
+        window.innerWidth / baseWidth,
+        window.innerHeight / baseHeight
+    );
+
+    canvas.style.width =
+        (baseWidth * scale) + "px";
+
+    canvas.style.height =
+        (baseHeight * scale) + "px";
+
+}
+
+resizeCanvas();
+
+window.addEventListener(
+    "resize",
+    resizeCanvas
+);
+
 Game.init(canvas);
 
 
@@ -48,11 +73,10 @@ startButton.addEventListener("click", async()=>{
 
     Sound.play("start");
 
-    // タイトル画面を隠す
     document.getElementById("titleScreen").style.display = "none";
 
-    // ゲーム画面を表示
-    document.getElementById("gameScreen").style.display = "block";
+    // blockではなくflexに変更
+    document.getElementById("gameScreen").style.display = "flex";
 
     Game.screen = "game";
 
