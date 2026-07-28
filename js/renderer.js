@@ -16,7 +16,34 @@ const Renderer = {
         }
 
 
-        ctx.clearRect(0,0,800,700);
+        ctx.clearRect(
+    0,
+    0,
+    game.canvas.width,
+    game.canvas.height
+);
+
+ctx.save();
+
+const scale = Math.min(
+
+    game.canvas.width / 800,
+
+    game.canvas.height / 700
+
+);
+
+const offsetX =
+    (game.canvas.width - 800 * scale)/2;
+
+const offsetY =
+    (game.canvas.height - 700 * scale)/2;
+
+ctx.translate(offsetX,offsetY);
+
+ctx.scale(scale,scale);
+
+
 
         // 背景
         ctx.fillStyle="#87ceeb";
@@ -281,7 +308,7 @@ ctx.fillRect(
 // FEVER文字（脈打つ）
 //=========================
 
-const scale =
+const feverscale =
     1 +
     Math.sin(
         performance.now()/90
@@ -295,8 +322,8 @@ ctx.translate(
 );
 
 ctx.scale(
-    scale,
-    scale
+    feverscale,
+    feverscale
 );
 
 ctx.fillStyle="#ffff55";
@@ -415,7 +442,7 @@ ctx.fillText(
 
 }
 
-
+ctx.restore();
 
     },
      

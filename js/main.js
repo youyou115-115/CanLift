@@ -6,16 +6,19 @@ function resizeCanvas(){
     const baseWidth = 800;
     const baseHeight = 700;
 
-    const scale = Math.min(
-        window.innerWidth / baseWidth,
-        window.innerHeight / baseHeight
-    );
+    if(window.innerWidth < 900){
 
-    canvas.style.width =
-        (baseWidth * scale) + "px";
+        // スマホ
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-    canvas.style.height =
-        (baseHeight * scale) + "px";
+    }else{
+
+        // PC
+        canvas.width = baseWidth;
+        canvas.height = baseHeight;
+
+    }
 
 }
 
