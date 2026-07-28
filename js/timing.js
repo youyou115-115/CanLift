@@ -12,7 +12,7 @@ const Timing = {
 
     if(Game.isMobile){
 
-        return 900;
+        return 850;
 
     }
 
