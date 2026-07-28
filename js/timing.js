@@ -130,7 +130,7 @@ if(distance <= goodRange){
 
 ctx.moveTo(0,y);
 
-ctx.lineTo(800,y);
+ctx.lineTo(Game.screenWidth, y);
 
         ctx.lineWidth = 4;
 

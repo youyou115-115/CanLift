@@ -23,27 +23,6 @@ const Renderer = {
     game.canvas.height
 );
 
-ctx.save();
-
-const scale = Math.min(
-
-    game.canvas.width / 800,
-
-    game.canvas.height / 700
-
-);
-
-const offsetX =
-    (game.canvas.width - 800 * scale)/2;
-
-const offsetY =
-    (game.canvas.height - 700 * scale)/2;
-
-ctx.translate(offsetX,offsetY);
-
-ctx.scale(scale,scale);
-
-
 
         // 背景
         ctx.fillStyle="#87ceeb";
@@ -194,8 +173,8 @@ if(game.feverState==="cutin"){
     ctx.fillRect(
         0,
         0,
-        800,
-        700
+       game.screenWidth,
+    game.screenHeight
     );
 
     ctx.fillStyle="#ffdd00";
@@ -209,9 +188,8 @@ if(game.feverState==="cutin"){
 
         "FEVER!!",
 
-        400,
-
-        330
+         game.screenWidth / 2,
+    game.screenHeight / 2 - 80
 
     );
 
@@ -222,22 +200,29 @@ if(game.feverState==="cutin"){
 
 if(game.feverState==="dice"){
 
-    ctx.fillStyle=
-        "rgba(0,0,0,0.75)";
+    ctx.fillStyle = "rgba(0,0,0,0.75)";
+ctx.fillRect(
+    0,
+    0,
+    game.screenWidth,
+    game.screenHeight
+);
 
-    ctx.fillStyle="#ffffff";
+ctx.fillStyle = "#ffffff";
 
     ctx.font="bold 120px sans-serif";
 
     ctx.textAlign="center";
 
+    const centerX = game.screenWidth / 2;
+const centerY = game.screenHeight / 2;
+
     ctx.fillText(
 
         game.diceValue,
 
-        400,
-
-        380
+         centerX,
+    centerY
 
     );
     ctx.font="bold 35px sans-serif";
@@ -246,16 +231,16 @@ ctx.fillStyle="#ffff00";
 
 ctx.fillText(
     "RESULT!",
-    400,
-    250
+     centerX,
+    centerY - 130
 );
 
     ctx.font="bold 32px sans-serif";
 
 ctx.fillText(
     "RESULT",
-    400,
-    450
+    centerX,
+    centerY + 70
 );
 
     ctx.font="bold 30px sans-serif";
@@ -264,9 +249,8 @@ ctx.fillText(
 
         "ROLLING...",
 
-        400,
-
-        470
+        centerX,
+    centerY + 100
 
     );
 
@@ -301,17 +285,16 @@ ctx.fillRect(
 
 0,
 
-800,
-
-700
+game.screenWidth,
+    game.screenHeight
 
 );
 
     ctx.fillRect(
         0,
         0,
-        800,
-        700
+        game.screenWidth,
+    game.screenHeight
     );
 
     //=========================
@@ -327,7 +310,7 @@ const feverscale =
 ctx.save();
 
 ctx.translate(
-    400,
+    game.screenWidth / 2,
     70
 );
 
@@ -373,9 +356,9 @@ ctx.fillText(
 
     sec.toFixed(1),
 
-    400,
+    game.screenWidth / 2,
 
-    120
+    game.isMobile ? 170 : 120
 
 );
 
@@ -391,8 +374,8 @@ ctx.fillText(
 
             ctx.fillText(
                 game.message,
-                400,
-                200
+                game.screenWidth / 2,
+                game.screenHeight * 0.28
             );
 
         }
@@ -408,7 +391,7 @@ ctx.fillText(
 
     ctx.save();
 
-    ctx.translate(400,260);
+    ctx.translate(game.screenWidth / 2,game.screenHeight * 0.36);
 
     ctx.scale(
         game.comboScale * pulse,
@@ -451,8 +434,6 @@ ctx.fillText(
     ctx.restore();
 
 }
-
-ctx.restore();
 
     },
      
