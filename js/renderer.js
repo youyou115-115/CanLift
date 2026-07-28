@@ -47,7 +47,17 @@ ctx.scale(scale,scale);
 
         // 背景
         ctx.fillStyle="#87ceeb";
-        ctx.fillRect(0,0,800,700);
+        ctx.fillRect(
+
+0,
+
+0,
+
+game.screenWidth,
+
+game.screenHeight
+
+);
 
 
         // 判定ライン

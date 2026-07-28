@@ -8,6 +8,18 @@ const Timing = {
     // 判定ライン
     lineY: 550,
 
+    getLineY(){
+
+    if(Game.isMobile){
+
+        return 900;
+
+    }
+
+    return this.lineY;
+
+},
+
     // 判定幅
     perfectRange: 10,
     goodRange: 35,
@@ -54,11 +66,11 @@ const Timing = {
 
         const distance = Math.abs(
 
-            can.getSweetSpotY() -
+    can.getSweetSpotY() -
 
-            this.lineY
+    this.getLineY()
 
-        );
+);
 
         const perfectRange =
     can.isExtra
@@ -114,9 +126,11 @@ if(distance <= goodRange){
 
         ctx.beginPath();
 
-        ctx.moveTo(0,this.lineY);
+        const y = this.getLineY();
 
-        ctx.lineTo(800,this.lineY);
+ctx.moveTo(0,y);
+
+ctx.lineTo(800,y);
 
         ctx.lineWidth = 4;
 
@@ -132,10 +146,6 @@ if(distance <= goodRange){
     // ライン取得
     //=========================
 
-    getLineY(){
-
-        return this.lineY;
-
-    }
+    
 
 };

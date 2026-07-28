@@ -60,20 +60,22 @@ update(dt) {
 
     }
 
-    if (this.x + this.width > 800) {
+    if(this.x + this.width > Game.screenWidth) {
 
-        this.x = 800 - this.width;
+        this.x =
+    Game.screenWidth - this.width;
         this.vx *= -0.8;
 
     }
 
     // 地面
-    if (this.y > 750) {
+    const ground = Game.screenHeight + 50;
 
-        this.active = false;
+if(this.y > ground){
 
-    }
+    this.active = false;
 
+}
 }
         //=========================
     // リフティング
@@ -383,7 +385,16 @@ create(){
 
 if(!can) return;
 
-can.reset(383,-120,false);
+const startY =
+    Game.isMobile
+    ? -20
+    : -120;
+
+can.reset(
+    383,
+    startY,
+    false
+);
 
 can.vy = 3;
 can.gravity = 0.12;
@@ -400,21 +411,27 @@ can.gravity = 0.12;
 
     spawnCan(){
 
-        const x =
-            120 +
-            Math.random() * 560;
+    const x =
+        120 +
+        Math.random() * 560;
 
-        const y =
-            -100 -
-            Math.random() * 100;
+    // スマホは画面のすぐ上から出す
+    const startY =
+        Game.isMobile
+        ? -20
+        : -100;
 
-        const can = this.pool.pop();
+    const y =
+        startY -
+        Math.random() * 50;
 
-if(!can) return;
+    const can = this.pool.pop();
 
-can.reset(x, y, true);
+    if(!can) return;
 
-this.cans.push(can);
+    can.reset(x, y, true);
+
+    this.cans.push(can);
 
 },
 
@@ -571,6 +588,12 @@ this.pool.push(removed);
 
     },
     spawnFever(count){
+        const feverStartY =
+    Game.isMobile
+    ? -20
+    : -100;
+
+    
 
     for(let i=0;i<count;i++){
 
@@ -585,6 +608,7 @@ if(!can){
       let y;
 
     if(count >= 5){
+        
 
         const spacing = 100;
         const startX =
@@ -595,12 +619,16 @@ if(!can){
             i * spacing +
             (Math.random() - 0.5) * 20;
 
-        y = -100 - i * 80;
+        y =
+    feverStartY -
+    i * 80;
 
     }else{
 
         x = 120 + Math.random() * 560;
-        y = -80 - i * 70;
+       y =
+    feverStartY -
+    i * 70;
 
     }
 
@@ -628,6 +656,11 @@ if(count >= 5){
 },
 spawnHealCan(){
 
+    const startY =
+    Game.isMobile
+    ? -20
+    : -100;
+
     console.log("HEAL CAN SPAWN");
 
     let can=this.pool.pop();
@@ -645,11 +678,11 @@ spawnHealCan(){
 
 
     can.reset(
-        x,
-        -100,
-        true,
-        "heal"
-    );
+    x,
+    startY,
+    true,
+    "heal"
+);
 
 
     this.cans.push(can);
@@ -659,16 +692,34 @@ spawnStartCans(){
 
     this.cans = [];
 
+    const startY1 =
+    Game.isMobile
+    ? -20
+    : -120;
+
+const startY2 =
+    Game.isMobile
+    ? -100
+    : -220;
+
     // 1本目
     let can = this.pool.pop() || new Can(0,0);
-    can.reset(300, -120, false);
+    can.reset(
+    300,
+    startY1,
+    false
+);
     can.vy = 3;
     can.gravity = 0.12;
     this.cans.push(can);
 
     // 2本目
     can = this.pool.pop() || new Can(0,0);
-    can.reset(500, -220, false);
+    can.reset(
+    500,
+    startY2,
+    false
+);
     can.vy = 3;
     can.gravity = 0.12;
     this.cans.push(can);
@@ -676,8 +727,5 @@ spawnStartCans(){
 }
 
 
-
-
-
-};
+    };
 

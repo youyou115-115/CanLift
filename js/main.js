@@ -3,22 +3,29 @@ document.getElementById("gameCanvas");
 
 function resizeCanvas(){
 
+    const mobile =
+        window.innerWidth < 700;
+
     const baseWidth = 800;
-    const baseHeight = 700;
 
-    if(window.innerWidth < 900){
+    const baseHeight =
+        mobile
+        ? 1200
+        : 700;
 
-        // スマホ
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+    const scale = Math.min(
 
-    }else{
+        window.innerWidth/baseWidth,
 
-        // PC
-        canvas.width = baseWidth;
-        canvas.height = baseHeight;
+        window.innerHeight/baseHeight
 
-    }
+    );
+
+    canvas.style.width =
+        (baseWidth*scale)+"px";
+
+    canvas.style.height =
+        (baseHeight*scale)+"px";
 
 }
 
@@ -80,6 +87,18 @@ startButton.addEventListener("click", async()=>{
 
     // blockではなくflexに変更
     document.getElementById("gameScreen").style.display = "flex";
+
+    if(window.innerWidth<700){
+
+    canvas.width=800;
+    canvas.height=1200;
+
+}else{
+
+    canvas.width=800;
+    canvas.height=700;
+
+}
 
     Game.screen = "game";
 

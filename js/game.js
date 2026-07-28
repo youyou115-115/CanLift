@@ -5,6 +5,14 @@
 
 const Game = {
 
+    //=========================
+// 仮想画面サイズ
+//=========================
+screenWidth:800,
+screenHeight:700,
+
+isMobile:false,
+
     canvas: null,
     ctx: null,
 
@@ -92,6 +100,20 @@ diceTimer:0,
 
 
     start(){
+
+        this.isMobile = window.innerWidth < 700;
+
+if(this.isMobile){
+
+    this.screenWidth = 800;
+    this.screenHeight = 1200;
+
+}else{
+
+    this.screenWidth = 800;
+    this.screenHeight = 700;
+
+}
 
         this.meteorMode=false;
 
