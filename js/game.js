@@ -275,16 +275,11 @@ resetCombo(){
 
         this.draw();
 
-         // 2秒後にタイトルへ戻る
-    setTimeout(()=>{
+setTimeout(()=>{
 
-        Game.screen = "title";
-        Game.running = false;
+    Game.returnTitle();
 
-        document.getElementById("gameScreen").style.display = "none";
-        document.getElementById("titleScreen").style.display = "block";
-
-    },2000);
+},2000);
 
     
 
@@ -611,16 +606,18 @@ failFever(){
 },
 returnTitle(){
 
+    this.running = false;
     this.screen = "title";
 
-    this.running = false;
+    // ゲーム画面を隠す
+    document.getElementById("gameScreen").style.display = "none";
+
+    // タイトル画面を表示
+    document.getElementById("titleScreen").style.display = "flex";
 
     this.message = "";
     this.comboMessage = "";
 
-    Renderer.draw(this);
-
-},
-
+}
 
 };

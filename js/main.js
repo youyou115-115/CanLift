@@ -54,6 +54,8 @@ startButton.addEventListener("click", async()=>{
     // ゲーム画面を表示
     document.getElementById("gameScreen").style.display = "block";
 
+    Game.screen = "game";
+
     Game.start();
 
 });
