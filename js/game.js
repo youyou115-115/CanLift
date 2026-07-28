@@ -624,6 +624,7 @@ endFever(){
 CanManager.cans.forEach(can => {
 
     can.active = false;
+    can.type = "normal";
     CanManager.pool.push(can);
 
 });
@@ -653,7 +654,7 @@ CanManager.targetCount = 2;
     CanManager.cans = [];
 
 CanManager.targetCount = 2;
-CanManager.fill();
+CanManager.spawnStartCans();
 
 
     Sound.stopFever();
@@ -743,6 +744,7 @@ finishMeteor(){
     CanManager.spawnCan();
 
 
-}
+},
+
 
 };

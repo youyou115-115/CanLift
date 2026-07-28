@@ -628,6 +628,8 @@ if(count >= 5){
 },
 spawnHealCan(){
 
+    console.log("HEAL CAN SPAWN");
+
     let can=this.pool.pop();
 
 
@@ -653,6 +655,25 @@ spawnHealCan(){
     this.cans.push(can);
 
 },
+spawnStartCans(){
+
+    this.cans = [];
+
+    // 1本目
+    let can = this.pool.pop() || new Can(0,0);
+    can.reset(300, -120, false);
+    can.vy = 3;
+    can.gravity = 0.12;
+    this.cans.push(can);
+
+    // 2本目
+    can = this.pool.pop() || new Can(0,0);
+    can.reset(500, -220, false);
+    can.vy = 3;
+    can.gravity = 0.12;
+    this.cans.push(can);
+
+}
 
 
 

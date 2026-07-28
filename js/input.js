@@ -184,7 +184,7 @@ if(can.type==="heal"){
 
     // 回復缶は消滅
     can.active = false;
-
+    can.type = "normal";
 }else{
 
     can.lift();
@@ -270,7 +270,8 @@ game.liftCount++;
 
     // 回復缶は消滅
     can.active = false;
-
+    can.type = "normal";
+    
 }else{
 
     can.lift();
@@ -359,7 +360,6 @@ game.liftCount++;
 
     if(game.combo==10){
 
-    Sound.playVoice("excellent");
 
 }
 
