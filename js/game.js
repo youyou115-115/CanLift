@@ -260,16 +260,7 @@ if(!this.feverMode){
 }
 
 
-// 隕石イベント判定
 
-if(
-this.liftCount>=50 &&
-!this.meteorMode
-){
-
-    this.startMeteor();
-
-}
 
 if(
     this.liftCount >= this.lastAddedCount + 10
@@ -439,6 +430,17 @@ CanManager.cans.forEach(can=>{
 
 },
 updateFever(){
+      const now = performance.now();
+
+    this.deltaTime =
+        (now - this.lastTime) / 12.666;
+
+    this.lastTime = now;
+
+    this.deltaTime =
+        Math.min(this.deltaTime,2);
+
+
     this.feverWatchDog++;
     if(this.feverWatchDog>900){
 
@@ -654,6 +656,11 @@ CanManager.cans.forEach(can => {
 
 CanManager.cans = [];
 
+ this.lastTime = performance.now();
+    this.deltaTime = 1;
+
+    this.feverWatchDog = 0;
+
 
     this.feverWatchDog = 0;
 
@@ -722,52 +729,6 @@ returnTitle(){
 
 },
 
-startMeteor(){
-
-    this.meteorMode=true;
-
-    this.meteorHP=100;
-
-
-    // 缶を全部消す
-
-    CanManager.cans.forEach(can=>{
-
-        can.active=false;
-        CanManager.pool.push(can);
-
-    });
-
-
-    CanManager.cans=[];
-
-
-    this.message="METEOR!!";
-
-    this.messageTimer=120;
-
-
-    CanManager.spawnMeteor();
-
-
-},
-finishMeteor(){
-
-    this.meteorMode=false;
-
-
-    this.message="METEOR BREAK!!";
-
-    this.messageTimer=120;
-
-
-    this.score+=500;
-
-
-    CanManager.spawnCan();
-
-
-},
 
 
 };
