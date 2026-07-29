@@ -102,5 +102,19 @@ startButton.addEventListener("click", async()=>{
     Game.screen = "game";
     Game.start();
 
+    
+    
+    document.getElementById("backTitle")
+.addEventListener("click",()=>{
+
+    document.getElementById("resultScreen")
+    .style.display="none";
+
+
+    document.getElementById("titleScreen")
+    .style.display="flex";
+
+
+});
 
 });

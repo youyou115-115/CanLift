@@ -63,7 +63,7 @@ const Ranking = {
 
         });
 
-        this.list=this.list.slice(0,10);
+        this.list=this.list.slice(0,3);
 
         this.save();
         this.updateView();
@@ -79,23 +79,23 @@ const Ranking = {
 
     list.innerHTML = "";
 
-    this.list.forEach((r,i)=>{
+    this.list.slice(0,3).forEach((r,i)=>{
 
-        const li =
-            document.createElement("li");
+    const li =
+        document.createElement("li");
 
-        if(i===0){
+    if(i===0){
 
-            li.classList.add("firstRank");
+        li.classList.add("firstRank");
 
-        }
+    }
 
-        li.textContent =
-            `${r.score} pt　${r.lift} LIFT　${r.combo} COMBO`;
+    li.textContent =
+        `${r.score} pt　${r.lift} LIFT　${r.combo} COMBO`;
 
-        list.appendChild(li);
+    list.appendChild(li);
 
-    });
+});
 
 }
 };

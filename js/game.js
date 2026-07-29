@@ -46,6 +46,7 @@ gameMode: "normal",
 healCount:0,
 healMax:3,
 healUnlocked:false,
+rankingSaved:false,
 
 
 
@@ -388,10 +389,9 @@ this.gameOverCombo = this.maxCombo;
 
 setTimeout(()=>{
 
-    Game.returnTitle();
+    Game.showResult();
 
 },3000);
-
     
 
 
@@ -778,6 +778,49 @@ returnTitle(){
 
 
     },100);
+
+},
+showResult(){
+
+    this.running=false;
+
+
+    document.getElementById("gameScreen").style.display="none";
+
+    const result =
+    document.getElementById("resultScreen");
+
+
+    result.style.display="flex";
+
+
+    document.getElementById("resultScore").textContent =
+    "SCORE : " + this.gameOverScore;
+
+
+    document.getElementById("resultLift").textContent =
+    "LIFT : " + this.gameOverLift;
+
+
+    document.getElementById("resultCombo").textContent =
+    "MAX COMBO : " + this.gameOverCombo;
+
+
+
+    if(!this.rankingSaved){
+
+        Ranking.add(
+            this.gameOverScore,
+            this.gameOverLift,
+            this.gameOverCombo
+        );
+
+        this.rankingSaved=true;
+
+    }
+
+
+    Ranking.updateView();
 
 }
 

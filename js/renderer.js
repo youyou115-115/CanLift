@@ -380,61 +380,7 @@ ctx.fillText(
 
         }
 
-        //=========================
-// GAME OVER RESULT
-//=========================
-
-if(game.message==="GAME OVER"){
-
-    ctx.fillStyle =
-        "rgba(0,0,0,0.65)";
-
-    ctx.fillRect(
-        100,
-        230,
-        600,
-        260
-    );
-
-
-    ctx.fillStyle="#ffffff";
-
-    ctx.textAlign="center";
-
-
-    ctx.font="bold 32px sans-serif";
-
-    ctx.fillText(
-        "RESULT",
-        game.screenWidth/2,
-        280
-    );
-
-
-    ctx.font="bold 28px sans-serif";
-
-    ctx.fillText(
-        "SCORE : " + game.gameOverScore,
-        game.screenWidth/2,
-        340
-    );
-
-
-    ctx.fillText(
-        "LIFT : " + game.gameOverLift,
-        game.screenWidth/2,
-        390
-    );
-
-
-    ctx.fillText(
-        "MAX COMBO : " + game.gameOverCombo,
-        game.screenWidth/2,
-        440
-    );
-
-}
-
+  
         if(game.comboMessage){
 
     // 少し脈打つ
