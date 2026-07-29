@@ -742,19 +742,6 @@ returnTitle(){
     this.screen = "title";
 
 
-    if(!this.rankingSaved){
-
-        Ranking.add(
-            this.gameOverScore,
-            this.gameOverLift,
-            this.gameOverCombo
-        );
-
-        this.rankingSaved=true;
-
-    }
-
-
     document.getElementById("gameScreen").style.display="none";
 
 
@@ -764,13 +751,31 @@ returnTitle(){
     title.style.display="flex";
 
 
-    Ranking.updateView();
+    setTimeout(()=>{
+
+        if(!this.rankingSaved){
+
+            Ranking.add(
+                this.gameOverScore,
+                this.gameOverLift,
+                this.gameOverCombo
+            );
+
+            this.rankingSaved=true;
+
+        }
+
+
+        Ranking.updateView();
+
+
+    },50);
 
 
     this.message="";
     this.comboMessage="";
 
-}
+},
 
 
 
