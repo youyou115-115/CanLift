@@ -283,7 +283,7 @@ if(!game.feverMode){
 
     // 回復缶は消滅
     can.active = false;
-    can.type = "normal";
+    //can.type = "normal";
     
 }else{
 
