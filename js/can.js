@@ -724,10 +724,10 @@ const startY2 =
     can = this.pool.pop() || new Can(0,0);
     can.reset(
     500,
-    startY2,
+    startY2 - 120,
     false
 );
-    can.vy = 3;
+    can.vy = 1.5;
     can.gravity = 0.12;
     this.cans.push(can);
 
