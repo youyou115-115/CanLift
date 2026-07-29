@@ -91,7 +91,7 @@ const Ranking = {
     }
 
     li.textContent =
-        `${r.score} pt　${r.lift} LIFT　${r.combo} COMBO`;
+        `${r.score} pt`;
 
     list.appendChild(li);
 
