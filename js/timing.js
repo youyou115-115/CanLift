@@ -21,8 +21,8 @@ const Timing = {
 },
 
     // 判定幅
-    perfectRange: 10,
-    goodRange: 35,
+    perfectRange: 20,
+    goodRange: 50,
 
 
 
@@ -34,12 +34,12 @@ const Timing = {
 
         this.perfectRange = Math.max(
             5,
-            10 - Math.floor(liftCount / 20)
+            10 - Math.floor(liftCount / 30)
         );
 
         this.goodRange = Math.max(
             18,
-            35 - Math.floor(liftCount / 6)
+            35 - Math.floor(liftCount / 10)
         );
 
     },

@@ -569,24 +569,28 @@ this.pool.push(removed);
     // 判定できる缶一覧
     //=========================
 
-    getJudgeCans(){
+   getJudgeCans(){
 
-        return this.cans.filter(can=>{
+    return this.cans.filter(can=>{
 
-            if(!can.active)
-                return false;
+        if(!can.active)
+            return false;
 
-            const judge =
-                Timing.check(can);
 
-            return(
-                judge.result !==
-                "MISS"
+        const distance =
+            Math.abs(
+                can.getSweetSpotY()
+                -
+                Timing.getLineY()
             );
 
-        });
 
-    },
+        // 判定受付範囲
+        return distance < 80;
+
+    });
+
+},
     spawnFever(count){
         const feverStartY =
     Game.isMobile
@@ -640,9 +644,9 @@ can.reset(
 );
 
 // FEVER缶は全体的にゆっくり
-can.vx *= 0.4;
-can.vy *= 0.45;
-can.gravity *= 0.45;
+can.vx *= 0.5;
+can.vy *= 0.55;
+can.gravity *= 0.7;
 
 
         this.cans.push(can);

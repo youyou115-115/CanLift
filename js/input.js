@@ -49,15 +49,18 @@ const Input = {
 
         const canvas = game.canvas;
 
-        // マウス
-        canvas.addEventListener("click",(e)=>{
+    
+       
+// PC
+canvas.addEventListener("mousedown",(e)=>{
 
-    this.tap(e);
+        this.tap(e);
 
-});
+    });
 
-        // タッチ
-        canvas.addEventListener("touchstart",(e)=>{
+
+// スマホ
+canvas.addEventListener("touchstart",(e)=>{
 
     e.preventDefault();
 
@@ -66,6 +69,11 @@ const Input = {
 },{
     passive:false
 });
+
+canvas.oncontextmenu = (e)=>{
+    e.preventDefault();
+};
+
     },
 
 
@@ -80,8 +88,8 @@ tap(e){
         const rect =
     this.game.canvas.getBoundingClientRect();
 
-const point =
-    e.touches ? e.touches[0] : e;
+const point = e;
+
 
 const x =
     point.clientX - rect.left;
