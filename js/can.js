@@ -691,6 +691,12 @@ spawnHealCan(){
 },
 spawnStartCans(){
 
+     // 現在の缶を完全回収
+    this.cans.forEach(can=>{
+        can.active=false;
+        this.pool.push(can);
+    });
+
     this.cans = [];
 
     const startY1 =
