@@ -83,6 +83,11 @@ diceTimer:0,
 
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d");
+        if(typeof Ranking !== "undefined"){
+
+    Ranking.init();
+
+}
 
         if(typeof UI !== "undefined"){
 
@@ -347,9 +352,21 @@ resetCombo(){
 
     damage(){
 
+        this.gameOverScore = this.score;
+this.gameOverLift = this.liftCount;
+this.gameOverCombo = this.maxCombo;
+
     this.hp--;
 
     if(this.hp <= 0){
+
+        Ranking.add(
+
+    this.score,
+    this.liftCount,
+    this.maxCombo
+
+);
 
         this.running = false;
 
@@ -362,6 +379,9 @@ resetCombo(){
         this.maxHp = 3;
         this.messageScale = 1.3;
          this.messageTimer = 999;
+ this.gameOverScore = this.score;
+this.gameOverLift = this.liftCount;
+this.gameOverCombo = this.maxCombo;
 
         this.draw();
 
@@ -369,7 +389,7 @@ setTimeout(()=>{
 
     Game.returnTitle();
 
-},2000);
+},5000);
 
     
 
@@ -717,6 +737,11 @@ returnTitle(){
 
     this.running = false;
     this.screen = "title";
+    if(typeof Ranking !== "undefined"){
+
+    Ranking.updateView();
+
+}
 
     // ゲーム画面を隠す
     document.getElementById("gameScreen").style.display = "none";

@@ -36,15 +36,15 @@ const UI = {
     draw(ctx){
 
         // スコア
-        ctx.fillStyle = "#ffffff";
-        ctx.font = "bold 28px sans-serif";
-        ctx.textAlign = "left";
+ctx.fillStyle = "#ffffff";
+ctx.font = "bold 28px sans-serif";
+ctx.textAlign = "left";
 
-        ctx.fillText(
-            "SCORE : " + this.score,
-            20,
-            40
-        );
+ctx.fillText(
+    "SCORE : " + this.score,
+    20,
+    40
+);
 
         // リフティング回数
         ctx.fillText(
@@ -53,6 +53,10 @@ const UI = {
             80
         );
 
-    }
+        
+
+    },
+
+    
 
 };

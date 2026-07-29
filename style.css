@@ -164,3 +164,93 @@ GAME
     align-items:center;
 
 }
+
+/*==================
+ RANKING
+==================*/
+
+#rankingBox{
+
+    margin-top:30px;
+
+    text-align:center;
+
+    color:#333333;
+
+}
+
+
+#rankingBox h2{
+
+    color:#ffd700;
+
+    font-size:28px;
+
+    text-shadow:
+        2px 2px 0 #ffffff;
+
+}
+
+
+#rankingList{
+
+    display:inline-block;
+
+    text-align:left;
+
+    margin-top:10px;
+
+    padding-left:40px;
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    color:#222222;
+
+}
+
+
+#rankingList li{
+
+    margin-bottom:8px;
+
+}
+
+/* 1位演出 */
+.firstRank{
+
+    color:#ffd700;
+
+    transform-origin:center;
+
+    animation:
+        rankWave 1.2s infinite ease-in-out;
+
+    text-shadow:
+        0 0 8px #ffd700;
+
+}
+
+
+@keyframes rankWave{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-6px);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+}
