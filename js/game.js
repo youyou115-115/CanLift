@@ -738,19 +738,23 @@ failFever(){
 
 returnTitle(){
 
+    console.log("returnTitle start");
+
+
     this.running = false;
     this.screen = "title";
 
 
     document.getElementById("gameScreen").style.display="none";
 
-
-    const title =
-    document.getElementById("titleScreen");
-
-    title.style.display="flex";
+    document.getElementById("titleScreen").style.display="flex";
 
 
+    this.message="";
+    this.comboMessage="";
+
+
+    // 少し後でランキング更新
     setTimeout(()=>{
 
         if(!this.rankingSaved){
@@ -765,18 +769,17 @@ returnTitle(){
 
         }
 
-
         Ranking.updateView();
 
+        console.log(
+            "Ranking",
+            Ranking.list
+        );
 
-    },50);
 
+    },100);
 
-    this.message="";
-    this.comboMessage="";
-
-},
-
+}
 
 
 };
