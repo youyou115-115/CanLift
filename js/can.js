@@ -498,6 +498,7 @@ this.cans.splice(i,1)[0];
 this.pool.push(removed);
 
             if(removed.type==="heal"){
+                removed.type = "normal";
 
     // 金缶は落としてもペナルティなし
 

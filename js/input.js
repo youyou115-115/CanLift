@@ -192,7 +192,7 @@ if(can.type==="heal"){
 
     // 回復缶は消滅
     can.active = false;
-    can.type = "normal";
+    //can.type = "normal";
 }else{
 
     can.lift();
