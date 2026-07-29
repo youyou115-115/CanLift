@@ -10,9 +10,17 @@ class Can {
 constructor(x, y) {
 
     // サイズ
-    this.width = 34;
-    this.height = 52;
+    if(Game.isMobile){
 
+        this.width = 42;
+        this.height = 64;
+
+    }else{
+
+        this.width = 34;
+        this.height = 52;
+
+    }
     this.maxFallSpeed = 100;
     this.sweetSpotOffset = this.height / 2;
 
@@ -186,7 +194,7 @@ if(this.type==="heal"){
 
         // 点のサイズ
 // 点のサイズ
-let dotSize = 4;
+let dotSize = Game.isMobile ? 6 : 4;
 
 // 追加缶なら少し大きくする
 if(this.isExtra){
@@ -587,7 +595,15 @@ this.pool.push(removed);
 
 
         // 判定受付範囲
-        return distance < 80;
+        let range = 80;
+
+if(Game.isMobile){
+
+    range = 120;
+
+}
+
+return distance < range;
 
     });
 
