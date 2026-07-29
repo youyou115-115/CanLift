@@ -5,8 +5,12 @@
 
 const Timing = {
 
+    
+
     // 判定ライン
     lineY: 550,
+
+    inputOffset: 0,
 
     getLineY(){
 
@@ -21,8 +25,8 @@ const Timing = {
 },
 
     // 判定幅
-    perfectRange: 20,
-    goodRange: 50,
+    perfectRange: 30,
+    goodRange: 60,
 
 
 
@@ -68,7 +72,7 @@ const Timing = {
 
     can.getSweetSpotY() -
 
-    this.getLineY()
+    (this.getLineY() + this.inputOffset)
 
 );
 

@@ -52,7 +52,7 @@ const Input = {
     
        
 // PC
-canvas.addEventListener("mousedown",(e)=>{
+canvas.addEventListener("click", (e) => {
 
         this.tap(e);
 
