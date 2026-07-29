@@ -398,7 +398,7 @@ setTimeout(()=>{
 
     Game.showResult();
 
-},3000);
+},2000);
     
 
 
