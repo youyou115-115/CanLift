@@ -125,7 +125,7 @@ note(freq,length,delay,vol=0.2,type="triangle"){
 
 good(){
 
-    const p=260+Math.random()*20;
+    const p=450+Math.random()*50;
 
     this.tone(
         p,
@@ -135,7 +135,7 @@ good(){
     );
 
     this.note(
-        p*1.4,
+        p*1.5,
         0.025,
         15,
         0.08,
