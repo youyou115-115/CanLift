@@ -128,6 +128,8 @@ this.meteorCount=0;
 
 this.meteorReward=false;
 
+this.rankingSaved = false;
+
         this.screen = "game";
 
     if(this.running){
@@ -358,15 +360,22 @@ this.gameOverCombo = this.maxCombo;
 
     this.hp--;
 
-    if(this.hp <= 0){
+  if(this.hp <= 0){
+
+    if(!this.rankingSaved){
 
         Ranking.add(
+            this.score,
+            this.liftCount,
+            this.maxCombo
+        );
 
-    this.score,
-    this.liftCount,
-    this.maxCombo
+        this.rankingSaved=true;
 
-);
+
+    this.rankingSaved = true;
+
+}
 
         this.running = false;
 
@@ -389,7 +398,7 @@ setTimeout(()=>{
 
     Game.returnTitle();
 
-},5000);
+},3000);
 
     
 
