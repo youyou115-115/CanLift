@@ -101,5 +101,10 @@ startButton.addEventListener("click", async()=>{
 
     Game.screen = "game";
     Game.start();
+    setTimeout(()=>{
+
+    Ranking.updateView();
+
+},100);
 
 });
