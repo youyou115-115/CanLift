@@ -197,11 +197,11 @@ if(this.type==="heal"){
 let dotSize = Game.isMobile ? 6 : 4;
 
 // 追加缶なら少し大きくする
-if(this.isExtra){
+//if(this.isExtra){
 
-    dotSize += 3;
+    //dotSize += 3;
 
-}
+//}
 
 // 色
 let color = "#33bbff";
