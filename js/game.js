@@ -362,6 +362,11 @@ this.gameOverCombo = this.maxCombo;
 
   if(this.hp <= 0){
 
+     // 最終結果保存
+    this.gameOverScore = this.score;
+    this.gameOverLift = this.liftCount;
+    this.gameOverCombo = this.maxCombo;
+
    
 
         this.running = false;
@@ -733,39 +738,39 @@ failFever(){
 
 returnTitle(){
 
-    
-
     this.running = false;
     this.screen = "title";
-    if(typeof Ranking !== "undefined"){
 
-   
-
-}
-
-    // ゲーム画面を隠す
-    document.getElementById("gameScreen").style.display = "none";
-
-    // タイトル画面を表示
-    document.getElementById("titleScreen").style.display = "flex";
 
     if(!this.rankingSaved){
 
-    Ranking.add(
-        this.gameOverScore,
-        this.gameOverLift,
-        this.gameOverCombo
-    );
+        Ranking.add(
+            this.gameOverScore,
+            this.gameOverLift,
+            this.gameOverCombo
+        );
 
-    this.rankingSaved=true;
+        this.rankingSaved=true;
+
+    }
+
+
+    document.getElementById("gameScreen").style.display="none";
+
+
+    const title =
+    document.getElementById("titleScreen");
+
+    title.style.display="flex";
+
+
+    Ranking.updateView();
+
+
+    this.message="";
+    this.comboMessage="";
 
 }
- Ranking.updateView();
-
-    this.message = "";
-    this.comboMessage = "";
-
-},
 
 
 
