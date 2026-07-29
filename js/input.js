@@ -201,7 +201,12 @@ if(can.type==="heal"){
 
 
 game.score += 30;
-game.liftCount++;
+
+if(!game.feverMode){
+
+    game.liftCount++;
+
+}
 
                 game.message = "PERFECT!";
                 game.messageScale = 1.5;
@@ -288,7 +293,12 @@ game.liftCount++;
 
 
 game.score += 10;
-game.liftCount++;
+
+if(!game.feverMode){
+
+    game.liftCount++;
+
+}
                 game.message = "GOOD!";
                 game.messageScale = 1.2;
                 game.messageTimer = 45;
