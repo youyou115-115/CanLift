@@ -676,6 +676,7 @@ CanManager.cans = [];
     CanManager.cans = [];
 
 CanManager.targetCount = 2;
+CanManager.respawnTimer = 0;
 CanManager.spawnStartCans();
 
 
