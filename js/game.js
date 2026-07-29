@@ -364,10 +364,17 @@ this.gameOverCombo = this.maxCombo;
   if(this.hp <= 0){
 
      // 最終結果保存
-    this.gameOverScore = this.score;
-    this.gameOverLift = this.liftCount;
-    this.gameOverCombo = this.maxCombo;
+    if(!this.rankingSaved){
 
+    Ranking.add(
+        this.gameOverScore,
+        this.gameOverLift,
+        this.gameOverCombo
+    );
+
+    this.rankingSaved=true;
+
+}
    
 
         this.running = false;
@@ -753,32 +760,8 @@ returnTitle(){
     this.message="";
     this.comboMessage="";
 
-
-    // 少し後でランキング更新
-    setTimeout(()=>{
-
-        if(!this.rankingSaved){
-
-            Ranking.add(
-                this.gameOverScore,
-                this.gameOverLift,
-                this.gameOverCombo
-            );
-
-            this.rankingSaved=true;
-
-        }
-
-        Ranking.updateView();
-
-        console.log(
-            "Ranking",
-            Ranking.list
-        );
-
-
-    },100);
-
+   
+       
 },
 showResult(){
 
