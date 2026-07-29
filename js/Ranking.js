@@ -64,8 +64,6 @@ const Ranking = {
 
         this.save();
 
-this.updateView();
-
     },
 
     updateView(){
