@@ -11,21 +11,24 @@ const Ranking = {
 
     init(){
 
-    const data =
-        localStorage.getItem(this.key);
-
-    if(data){
-
-       if(data){
     try{
-        this.list = JSON.parse(data);
+
+        const data =
+            localStorage.getItem(this.key);
+
+        if(data){
+
+            this.list = JSON.parse(data);
+
+        }else{
+
+            this.list=[];
+
+        }
+
     }catch(e){
-        this.list = [];
-    }
-}else{
-    this.list = [];
-}
-    }else{
+
+        console.log("Ranking Load Error",e);
 
         this.list=[];
 
@@ -63,6 +66,7 @@ const Ranking = {
         this.list=this.list.slice(0,10);
 
         this.save();
+        this.updateView();
 
     },
 
