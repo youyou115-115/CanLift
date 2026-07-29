@@ -176,7 +176,8 @@ this.diceTimer = 0;
 
 this.healCount = 0;
 this.healUnlocked = false;
-this.healTimer = 900;
+//this.healTimer = 900;
+this.healTimer = this.isMobile ? 450 : 600;
 
         CanManager.create();
 
